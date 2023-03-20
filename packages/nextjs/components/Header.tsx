@@ -52,6 +52,12 @@ export default function Header() {
           Example UI
         </NavLink>
       </li>
+      <li>
+        <NavLink href="/togs">
+          <SparklesIcon className="h-4 w-4" />
+          Togs
+        </NavLink>
+      </li>
     </>
   );
 
