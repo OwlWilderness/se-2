@@ -40,15 +40,16 @@ contract CryptoGenDEX {
 
 //external contracts...
 //
-  ERC1155 public togs; //cogs in the machine - pieces of the machine #gotf
-  IERC20 public genx;
+  IRC1155 public togs; //cogs in the machine - pieces of the machine #gotf
+  IRC20 public genx;
   //ERC1155 togs;
 
   uint public Erc1155MaxTokenId = 0;
 
   constructor(address token_addr, address togs_addr) {
-    genx = IERC20(token_addr);
+    genx = ERC20(token_addr);
     togs = ERC1155(togs_addr);
+
   }
 
   // write your functions here...
@@ -56,18 +57,35 @@ contract CryptoGenDEX {
   mapping (address => uint256) public liquidity;
 
   //a single address can have the following token allocations
-  //-- 1 - chain token (erc20 - amount)  .balance
+  //-- 1 - chain token (erc20 - amount)  .balance 
   //-- 2 - genx token (erc20 - amount) .transfer
   //-- 3 - tog token (erc1155 - various amounts of multiple ids) .withdraw;
   ///    - - setting approval for erc1155 requires an approval of the entire collection
 
+  struct share{
+    address operartor;  //address using the dex (could be this contract address)
+    uint256 balchain;  //balance of chain token
+    uint256 balgendx;  //balance of gendex token
+    mapping(address => mapping(uint256 => uint256)) bal1155; //1155 tokens
+    mapping(address => uint256) bal20; 
+  }
+
+  mapping(address => share) public Shares;
 
   function init(uint256 tokenAmt) public payable returns (uint256) {
     require(totalLiquidity==0,"DEX:init - already has liquidity");
-    totalLiquidity = address(this).balance;
-    liquidity[msg.sender] = totalLiquidity;
+    //totalLiquidity = address(this).balance;
+    //liquidity[msg.sender] = totalLiquidity;
     require(genx.transferFrom(msg.sender, address(this), tokenAmt));
-    return totalLiquidity;
+
+    share memory _share = Shares[address(this)];
+    _share.operartor = address(this);
+    _share.balchain = address(this).balance;
+    _share.balgendx = genx.balanceOf(address(this));
+    Shares[address(this)] = _share;
+
+
+    return Shares[address(this)].balchain;
   }
 
 
