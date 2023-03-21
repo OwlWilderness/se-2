@@ -66,11 +66,34 @@ contract CryptoGenDEX {
     address operartor;  //address using the dex (could be this contract address)
     uint256 balchain;  //balance of chain token
     uint256 balgendx;  //balance of gendex token
-    mapping(address => mapping(uint256 => uint256)) bal1155; //1155 tokens
+    mapping(address => ooff) bal1155; //address of 1155 token => ooff:{1155 token id => Amount of Id}
     mapping(address => uint256) bal20; 
   }
+  
+  struct ooff{
+    mapping(uint256 => uint256) ofId;
+  }
+
 
   mapping(address => share) public Shares;
+
+//called from on recieve 1155 token
+  function add1155Share(address operator, address adr1155, uint256[] ids, uint246[] vals) internal {
+    share memory _share = Shares[operator];
+    ooff memory _ooff = _share.bal1155[adr1155];
+    
+
+    //update 1155 token balances for this operator
+    _share.operartor = operartor;
+    for(uint i = 0; i < ids.length; ++i) {
+      uint256 amt = ooff[ids[i]] + vals[i];
+      ooff[ids[i]] = amt;
+    }
+    _share.bal1155[addr155] = ooff;
+
+
+    Shares[operator] = _share;
+  }
 
   function init(uint256 tokenAmt) public payable returns (uint256) {
     require(totalLiquidity==0,"DEX:init - already has liquidity");
