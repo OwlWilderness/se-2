@@ -19,8 +19,10 @@ pragma solidity >=0.8.0 <0.9.0;
 
     ///ERC1155 
     import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-    import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I need this if I am adding the on receive events?
+  //  import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I need this if I am adding the on receive events?
    
+    import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+    import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract CryptoGenDEX {
 
@@ -40,21 +42,22 @@ contract CryptoGenDEX {
 
 //external contracts...
 //
-  IRC1155 public togs; //cogs in the machine - pieces of the machine #gotf
-  IRC20 public genx;
+  ERC1155 public togs; //cogs in the machine - pieces of the machine #gotf
+  IERC20 public genx;
   //ERC1155 togs;
 
   uint public Erc1155MaxTokenId = 0;
+  uint256 public totalLiquidity = 0;
+
 
   constructor(address token_addr, address togs_addr) {
-    genx = ERC20(token_addr);
+    genx = IERC20(token_addr);
     togs = ERC1155(togs_addr);
 
   }
 
   // write your functions here...
-  uint256 public totalLiquidity;
-  mapping (address => uint256) public liquidity;
+  mapping (address => mapping(uint256 => uint256)) public maxTokenIds; //token address => (token id => token amount)
 
   //a single address can have the following token allocations
   //-- 1 - chain token (erc20 - amount)  .balance 
@@ -78,18 +81,20 @@ contract CryptoGenDEX {
   mapping(address => share) public Shares;
 
 //called from on recieve 1155 token
-  function add1155Share(address operator, address adr1155, uint256[] ids, uint246[] vals) internal {
-    share memory _share = Shares[operator];
-    ooff memory _ooff = _share.bal1155[adr1155];
+  function add1155Share(address operator, address addr1155, uint256[] memory ids, uint256[] memory vals) internal {
+    share storage _share = Shares[operator];
+    ooff storage _ooff = _share.bal1155[addr1155];
     
 
     //update 1155 token balances for this operator
-    _share.operartor = operartor;
+    _share.operartor = operator;
     for(uint i = 0; i < ids.length; ++i) {
-      uint256 amt = ooff[ids[i]] + vals[i];
-      ooff[ids[i]] = amt;
+      uint256 id = ids[i];
+      uint256 amt = _ooff.ofId[id] + vals[i];
+ 
+      _ooff.ofId[id] = amt;
     }
-    _share.bal1155[addr155] = ooff;
+    _share.bal1155[addr1155] = _ooff;
 
 
     Shares[operator] = _share;
@@ -97,25 +102,20 @@ contract CryptoGenDEX {
 
   function init(uint256 tokenAmt) public payable returns (uint256) {
     require(totalLiquidity==0,"DEX:init - already has liquidity");
-    //totalLiquidity = address(this).balance;
+    totalLiquidity = address(this).balance;
     //liquidity[msg.sender] = totalLiquidity;
     require(genx.transferFrom(msg.sender, address(this), tokenAmt));
 
-    share memory _share = Shares[address(this)];
+    share storage _share = Shares[address(this)];
     _share.operartor = address(this);
     _share.balchain = address(this).balance;
     _share.balgendx = genx.balanceOf(address(this));
     Shares[address(this)] = _share;
 
-
     return Shares[address(this)].balchain;
   }
 
-
-
-
-
-      ///@notice to support receiving ETH by default
+    ///@notice to support receiving ETH by default
     receive() external payable {}
     fallback() external payable {}
 
@@ -138,16 +138,10 @@ contract CryptoGenDEX {
      * @return `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))` if transfer is allowed
      */
     function onERC1155Received(address operator, address from, uint256 id, uint256 value, bytes memory data) public override returns (bytes4) {
-        empty = false;
-        
-        //  mapping (address => uint256) public liquidity;
-        //increase max token if we see a bigger token 
-        if(id > Erc1155MaxTokenId){
-            Erc1155MaxTokenId = id;
-        }        
+
+        add1155Share(operator, from, [id], [value]);
         return this.onERC1155Received.selector;
     }
-  mapping (address => uint256) public liquidity;
 
     /**
      * @dev Handles the receipt of a multiple ERC1155 token types. This function
@@ -166,13 +160,15 @@ contract CryptoGenDEX {
      * @return `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))` if transfer is allowed
      */
     function onERC1155BatchReceived(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) public override returns (bytes4) {
-        empty = false;
-        for(uint i = 0; i < ids.length; ++i) {
-            //increase max token if we see a bigger token
-            if(i > Erc1155MaxTokenId){
-                Erc1155MaxTokenId = i;
-            }
-        }
+        //TODO - call add share
+        //empty = false;
+        //for(uint i = 0; i < ids.length; ++i) {
+        //    //increase max token if we see a bigger token
+        //    if(i > Erc1155MaxTokenId){
+        //        Erc1155MaxTokenId = i;
+        //    }
+       // }
+        add1155Share(operator, from, ids, values);
         return this.onERC1155BatchReceived.selector;
     }
 
