@@ -19,7 +19,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
     ///ERC1155 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-//import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I need this if I am adding the on receive events?
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I need this if I am adding the on receive events?
  
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
@@ -75,6 +75,12 @@ contract CryptoGenDEX {
     ooff storage _ooff = _share.bal1155[addr1155];
     
 
+    dAddShare = true;
+    dOp = operator;
+    dFrom = addr1155;
+    dMS = msg.sender;
+    //d_MS = _msgSender();
+
     //update 1155 token balances for this operator
     _share.operartor = operator;
     for(uint i = 0; i < ids.length; ++i) {
@@ -121,6 +127,13 @@ contract CryptoGenDEX {
 //ERC1155 receiver implementation...
 // do not need if importing ERC1155Holder
 
+bool public dOnRcv= false;
+bool public dOnBatchRcv = false;
+bool public dAddShare = false;
+address public dOp;
+address public dFrom;
+address public dMS;
+address public d_MS;
     /**
      * @dev Handles the receipt of a single ERC1155 token type. This function is
      * called at the end of a `safeTransferFrom` after the balance has been updated.
@@ -136,7 +149,8 @@ contract CryptoGenDEX {
      * @param data Additional data with no specified format
      * @return `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))` if transfer is allowed
      */
-    function onERC1155Received(address operator, address from, uint256 id, uint256 value, bytes memory data) public returns (bytes4) {
+    function onERC1155Received(address operator, address from, uint256 id, uint256 value, bytes memory data) public override returns (bytes4) {
+        dOnRcv = true;
         uint256[] memory ids = new uint256[](1);
         uint256[] memory vals = new uint256[](1);
 
@@ -163,7 +177,7 @@ contract CryptoGenDEX {
      * @param data Additional data with no specified format
      * @return `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))` if transfer is allowed
      */
-    function onERC1155BatchReceived(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) public returns (bytes4) {
+    function onERC1155BatchReceived(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) public override returns (bytes4) {
         //TODO - call add share
         //empty = false;
         //for(uint i = 0; i < ids.length; ++i) {
@@ -172,6 +186,7 @@ contract CryptoGenDEX {
         //        Erc1155MaxTokenId = i;
         //    }
        // }
+       dOnBatchRcv = true;
         add1155Share(operator, from, ids, values);
         return this.onERC1155BatchReceived.selector;
     }
