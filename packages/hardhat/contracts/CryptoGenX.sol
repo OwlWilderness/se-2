@@ -3,7 +3,9 @@ pragma solidity >=0.8.0 <0.9.0;
 //https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex/packages/hardhat/contracts
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract CryptoGenX is ERC20 {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CryptoGenX is Ownable, ERC20 {
   constructor() ERC20("CryptoGenX", "CGX") {
       // **You can update the msg.sender address with your 
       // front-end address to mint yourself tokens.
@@ -11,6 +13,10 @@ contract CryptoGenX is ERC20 {
       _mint(0x1A4c2B35c9B4CC9F9A833A43dBe3A78FDB80Bb54, 1000 ether);
       // This mints to the deployer
       _mint(msg.sender, 1000 ether);
+  }
+
+  function Mint() public onlyOwner {
+    _mint(msg.sender, 1000 ether);
   }
 }
 

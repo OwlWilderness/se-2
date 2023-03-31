@@ -37,7 +37,13 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await deploy("CryptogsRebornGenesis", {
     from: deployer,
     // Contract constructor arguments
-    args: [["0x1A4c2B35c9B4CC9F9A833A43dBe3A78FDB80Bb54"]],
+    args: [
+      [
+        "0x1A4c2B35c9B4CC9F9A833A43dBe3A78FDB80Bb54",
+        "0x47cf52332a60d15CCd534B7C255dD8777d0B65FA",
+        "0x8fa282757D6CC54812E56EE3E90561F6E373f17e",
+      ],
+    ],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
@@ -51,10 +57,18 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     args: [cryptoGenX.address, cryptogsRebornGenesis.address],
     log: true,
   });
+
+  const cryptoGenDex = await hre.ethers.getContract("CryptoGenDEX", deployer);
+
+  await cryptoGenX.transferOwnership("0x47cf52332a60d15CCd534B7C255dD8777d0B65FA");
+
+  await cryptogsRebornGenesis.transferOwnership("0x47cf52332a60d15CCd534B7C255dD8777d0B65FA");
+
+  await cryptoGenDex.transferOwnership("0x47cf52332a60d15CCd534B7C255dD8777d0B65FA");
 };
 
 export default deployYourContract;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags CryptoGenDEX
-deployYourContract.tags = ["CryptoGenX", "CryptoGenDEX"];
+deployYourContract.tags = ["CryptoGenX", "CryptogsRebornGenesis", "CryptoGenDEX"];
