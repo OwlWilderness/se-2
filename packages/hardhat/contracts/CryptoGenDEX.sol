@@ -29,46 +29,33 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   string public name = "Crypto Gen DEX";
   string public symbol = "CGDX";
 
-//external contracts...
+//EXTERNAL CONTRACTS...
 //
   ERC1155 public togs; //cogs in the machine - pieces of the machine #gotf
   IERC20 public genx;
-  //ERC1155 togs;
 
-  uint256 public countOf1155Tokens = 0;
+//PUBLIC VARIABLES
+//
+  uint256 public countOf1155Tokens = 0; //total count (amount) of all 1155 tokens held by this contract
+
   uint256 public totalLiquidity = 0;
-  uint256 public total1155Types = 0;
+  uint256 public total1155Types = 0; //number of different 1155 token addresses 
   uint256 public total20Types = 0;
 
-  ///*
-  //debug
-  address public LastOperator;
-  address public LastFrom;
-  string  public LastAction = "Contract Created";
+  address public LastOperator; //last operator - set in On Recieved
+  address public LastFrom; //last from - set in on Recieved
+  string  public LastAction = "Contract Created"; // last action - set in contract creation and on received
   address public LastMsgSender; //will be the erc1155 token address in the on recieve
   //address public LastMsgSender_; //
-  //*/
 
-  //events
-  event AddShareEvent(address operator, address token, uint256[] ids, uint256[] vals);
-
-  constructor(address token_addr, address togs_addr) {
-    genx = IERC20(token_addr);
-    togs = ERC1155(togs_addr);
-
-  }
-
- //token info
-  mapping (address => uint256) public maxTokenIds; //token address => (token id => token amount)
-  mapping (address => uint256) public countForAddr; //token address => total count of tokens 
-
+//STRUCTURES
+//
   //shares for an address 
   //a single address can have the following token allocations
   //-- 1 - chain token (erc20 - amount)  .balance 
   //-- 2 - genx token (erc20 - amount) .transfer
   //-- 3 - tog token (erc1155 - various amounts of multiple ids) .withdraw;
   ///    - - setting approval for erc1155 requires an approval of the entire collection
-
   struct share{
     address operator;  //address using the dex (could be this contract address)
     uint256 balchain;  //balance of chain token
@@ -77,13 +64,74 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
     mapping(address => uint256) bal20; 
   }
   
-  mapping(address => share) public Shares;
+  //token amount structure - used in views
+  struct atamt{
+    address t;
+    tamt[] tamts;
+  }
 
- function getShare(address adr) public view returns (share) {
+  struct tamt{
+    uint256 id;
+    uint256 amt;
+  }
 
-  return Shares[adr];
+//MAPPINGS
+   //token info
+  mapping (address => uint256) public maxTokenIds; //token address => (token id => token amount)
+  mapping (address => uint256) public countForAddr; //token address => total count of tokens 
+  mapping(address => share) public Shares; //shares each operator holds
+  mapping(uint256 => address) public id1155; //id => 1155 token address
 
+//EVENTS
+//
+  event AddShareEvent(address operator, address token, uint256[] ids, uint256[] vals);
+
+//CONSTRUCTOR
+//
+  constructor(address token_addr, address togs_addr) {
+    genx = IERC20(token_addr);
+    togs = ERC1155(togs_addr);
+
+  }
+
+ function getShare(address operator) public view returns (atamt[] memory) {
+
+  //maxTokenIds max id for each 1155 token
+  //total1155Types total # 1155 token types
+  //id1155 list of 1155 tokens
+
+  atamt[] memory at = new atamt[](total1155Types);
+
+  //is it better to set an in memory variable or read right from storage each time?
+
+  for(uint256 adr = 0; adr < total1155Types; ++adr){
+  //lets check if this operator has any 1155 tokens
+    if(Shares[operator].bal1155[id1155[adr]] == 0){
+      //this operator does not have any tokens of this type
+      continue;
+    }
+    for(uint256 id = 0; id <= maxTokenIds[id1155[adr]] ; ++id){
+      if(Shares[operator].bal1155[id1155[adr]][id] > 0){
+        //the amount of this type of token id for this operator
+
+      }
+    }
+
+  }
+
+  return at;
  }
+
+  //account for this token type
+  function account1155(address addr1155) internal {
+          //have we seen this token addr before?
+      uint256 ct = countForAddr[addr1155];
+      if (ct == 0) {
+        id1155[total1155Types] = addr1155;
+        total1155Types = total1155Types + 1;
+      }
+      countForAddr[addr1155] =  ct + 1;
+  }
 
 //called from on recieve 1155 token
   function add1155Share(address operator, address addr1155, uint256[] memory ids, uint256[] memory vals) internal {
@@ -91,12 +139,11 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
     //ok to ovrewrite.  would evaluating then overwriting make a dif in gass?
     Shares[operator].operator = operator;
 
-    //update 1155 token balances for this operator
-    countOf1155Tokens = countOf1155Tokens + ids.length;
+    //have we seen this token addr before?
+    account1155(addr1155);
 
     //update 1155 token amounts
     for(uint i = 0; i < ids.length; ++i) {
-
       uint256 id = ids[i];
 
       //add ammount to shares
@@ -109,13 +156,8 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
           maxTokenIds[addr1155] = id;
        }
 
-      //count of this 1155 token
-       uint256 cnt = countForAddr[addr1155];
-      countForAddr[addr1155] = cnt + vals[i];
-
        //total count of 1155 tokens
       countOf1155Tokens = countOf1155Tokens + vals[i];
-
     }
 
     emit AddShareEvent(operator,addr1155,ids,vals);
