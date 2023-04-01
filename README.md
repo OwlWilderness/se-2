@@ -1,4 +1,7 @@
 # TOG DEX
+
+tog dex allows players to exchange 1155 tokens
+
 ```
 /*
 ///@title    DEX for ERC 1155 Tokens
@@ -16,6 +19,8 @@ ERC 20 Token
 ERC 1155 Holder
 
 #### Shares
+
+- player shares are created based on tokens sent to the contract
 
 ```
   //shares for an address 
