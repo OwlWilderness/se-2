@@ -1,3 +1,37 @@
+# TOG DEX
+```
+/*
+///@title    DEX for ERC 1155 Tokens
+///@author   quantumtekh.eth
+///@repo:    https://github.com/OwlWilderness/se-2/tree/se2h
+///@notice   dex to support 1155 cryptog tokens
+///@notice   some code from: https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex         
+*/
+```
+## Contracts
+### CryptoGenX
+ERC 20 Token
+
+### CryptoGenDEX
+ERC 1155 Holder
+
+#### Shares
+
+```
+  //shares for an address 
+  //a single address can have the following token allocations
+  //-- 1 - chain token (erc20 - amount)  .balance 
+  //-- 2 - genx token (erc20 - amount) .transfer
+  //-- 3 - tog token (erc1155 - various amounts of multiple ids) .withdraw;
+  ///    - - setting approval for erc1155 requires an approval of the entire collection
+  struct share{
+    address operator;  //address using the dex (could be this contract address)
+    uint256 balchain;  //balance of chain token
+    uint256 balgendx;  //balance of gendex token
+    mapping(address => mapping(uint256 => uint256)) bal1155; //address of 1155 token => ooff:{1155 token id => Amount of Id}
+    //mapping(address => uint256) bal20; 
+  }
+```
 # Scaffold-Eth 2
 
 ⚠️ This project is currently under active development. Things might break. Feel free to check the open issues & create new ones.

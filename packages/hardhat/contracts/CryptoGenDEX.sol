@@ -2,9 +2,9 @@ pragma solidity >=0.8.0 <0.9.0;
 // SPDX-License-Identifier: MIT
 
 /*
-///@title    Chaotic Staker app for ERC 1155 Tokens
+///@title    DEX for ERC 1155 Tokens
 ///@author   quantumtekh.eth
-///@repo:    https://github.com/OwlWilderness/se-2/tree/tog-dex
+///@repo:    https://github.com/OwlWilderness/se-2/tree/se2h
 ///@notice   dex to support 1155 cryptog tokens
 ///@notice   some code from: https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex         
 */
@@ -61,15 +61,16 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
     uint256 balchain;  //balance of chain token
     uint256 balgendx;  //balance of gendex token
     mapping(address => mapping(uint256 => uint256)) bal1155; //address of 1155 token => ooff:{1155 token id => Amount of Id}
-    mapping(address => uint256) bal20; 
+    //mapping(address => uint256) bal20; 
   }
   
-  //token amount structure - used in views
+  //address token amount structure - used in views
   struct atamt{
     address t;
     tamt[] tamts;
   }
 
+  //token amount structure
   struct tamt{
     uint256 id;
     uint256 amt;
@@ -100,26 +101,42 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   //total1155Types total # 1155 token types
   //id1155 list of 1155 tokens
 
-  atamt[] memory at = new atamt[](total1155Types);
+  console.log("totaltypes",total1155Types);
+  atamt[] memory ats = new atamt[](total1155Types);
 
   //is it better to set an in memory variable or read right from storage each time?
 
-  for(uint256 adr = 0; adr < total1155Types; ++adr){
-  //lets check if this operator has any 1155 tokens
-    if(Shares[operator].bal1155[id1155[adr]] == 0){
-      //this operator does not have any tokens of this type
-      continue;
-    }
-    for(uint256 id = 0; id <= maxTokenIds[id1155[adr]] ; ++id){
-      if(Shares[operator].bal1155[id1155[adr]][id] > 0){
-        //the amount of this type of token id for this operator
+  for(uint256 i = 0; i < total1155Types; ++i){
+  //lets check if this operator has any 1155 tokensgit a
 
+    //if(Shares[operator].operator == 0) continue;
+
+    address taddr = id1155[i];
+    if(taddr == address(0)) continue;
+
+    //if(Shares[operator].bal1155[taddr] == mapping(uint256 => uint256)) continue;
+    
+    uint max = maxTokenIds[taddr];
+    if(max == 0) continue;
+
+    console.log("i",i,"max",max);
+    tamt[] memory tamts = new tamt[](max + 1);
+    atamt memory at = atamt(taddr,tamts);
+
+    for(uint256 j = 0; j <= max ; ++j){
+       
+
+      if(Shares[operator].bal1155[taddr][j] > 0){
+        //the amount of this type of token id for this operator
+        tamts[j]= tamt(j, Shares[operator].bal1155[taddr][j]);
       }
     }
 
-  }
+    at.tamts = tamts;
+    ats[i] = at;
+   }
 
-  return at;
+  return ats;
  }
 
   //account for this token type
