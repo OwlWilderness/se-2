@@ -39,11 +39,15 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   uint256 public totalLiquidity = 0;
   uint256 public total1155Types = 0;
   uint256 public total20Types = 0;
-  address public rLastOperator;
-  address public rLastFrom;
-  string public rLastOnEvent = "Contract Created";
-  address public rLastMsgSender;
-  address public rLastMsgSender_;
+
+  ///*
+  //debug
+  address public LastOperator;
+  address public LastFrom;
+  string  public LastAction = "Contract Created";
+  address public LastMsgSender; //will be the erc1155 token address in the on recieve
+  //address public LastMsgSender_; //
+  //*/
 
   //events
   event AddShareEvent(address operator, address token, uint256[] ids, uint256[] vals);
@@ -75,6 +79,11 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   
   mapping(address => share) public Shares;
 
+ function getShare(address adr) public view returns (share) {
+
+  return Shares[adr];
+
+ }
 
 //called from on recieve 1155 token
   function add1155Share(address operator, address addr1155, uint256[] memory ids, uint256[] memory vals) internal {
@@ -132,6 +141,7 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
 //ERC1155 receiver implementation...
 
 
+
     /**
      * @dev Handles the receipt of a single ERC1155 token type. This function is
      * called at the end of a `safeTransferFrom` after the balance has been updated.
@@ -139,6 +149,8 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
      * NOTE: To accept the transfer, this must return
      * `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))`
      * (i.e. 0xf23a6e61, or its own function selector).
+     *
+     * NOTE: items minted to this contract will increment the null address share 
      *
      * @param operator The address which initiated the transfer (i.e. msg.sender)
      * @param from The address which previously owned the token (token contract address??)
@@ -149,19 +161,22 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
      */
     function onERC1155Received(address operator, address from, uint256 id, uint256 value, bytes memory data) public override returns (bytes4) {
 
-        rLastOperator = operator;
-        rLastFrom = from;
-        rLastOnEvent = "onERC1155Received";
-        rLastMsgSender = msg.sender;
-        rLastMsgSender_ = _msgSender();
-
+        ///*
+          // debug
+          LastOperator = operator;
+          LastFrom = from;
+          LastAction = "onERC1155Received";
+          LastMsgSender = msg.sender;
+          //      LastMsgSender_ = _msgSender();
+        //*/
         uint256[] memory ids = new uint256[](1);
         uint256[] memory vals = new uint256[](1);
 
         ids[0] = id;
         vals[0] = value;
 
-        add1155Share(operator, from, ids, vals);
+        add1155Share(operator, msg.sender, ids, vals);
+
         return this.onERC1155Received.selector;
     }
 
@@ -174,6 +189,8 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
      * `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
      * (i.e. 0xbc197c81, or its own function selector).
      *
+     * NOTE: items minted to this contract will increment the null address share 
+     *
      * @param operator The address which initiated the batch transfer (i.e. msg.sender)
      * @param from The address which previously owned the token
      * @param ids An array containing ids of each token being transferred (order and length must match values array)
@@ -183,11 +200,12 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
      */
     function onERC1155BatchReceived(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) public override returns (bytes4) {
 
-        rLastOperator = operator;
-        rLastFrom = from;
-        rLastOnEvent = "onERC1155BatchReceived";
+        LastOperator = operator;
+        LastFrom = from;
+        LastAction = "onERC1155BatchReceived";
+        LastMsgSender = msg.sender;
 
-        add1155Share(operator, from, ids, values);
+        add1155Share(operator, msg.sender, ids, values);
         return this.onERC1155BatchReceived.selector;
     }
 
