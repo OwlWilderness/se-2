@@ -70,7 +70,7 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
     tamt[] tamts;
   }
 
-  //token amount structure
+  //token amount struct
   struct tamt{
     uint256 id;
     uint256 amt;
@@ -95,6 +95,8 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
 
   }
 
+//PUBLIC VIEWS
+//
  function getShare(address operator) public view returns (atamt[] memory) {
 
   //maxTokenIds max id for each 1155 token
@@ -139,6 +141,8 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   return ats;
  }
 
+//INTERNAL CONTROLS
+//
   //account for this token type
   function account1155(address addr1155) internal {
           //have we seen this token addr before?
@@ -186,11 +190,11 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
 
     require(genx.transferFrom(msg.sender, address(this), tokenAmt));
 
-    Shares[address(this)].operator = address(this);
-    Shares[address(this)].balchain = address(this).balance;
-    Shares[address(this)].balgendx = genx.balanceOf(address(this));
+    Shares[msg.sender].operator = msg.sender;
+    Shares[msg.sender].balchain = address(this).balance;
+    Shares[msg.sender].balgendx = genx.balanceOf(address(this));
 
-    return Shares[address(this)].balchain;
+    return Shares[msg.sender].balchain;
   }
 
     ///@notice to support receiving ETH by default
