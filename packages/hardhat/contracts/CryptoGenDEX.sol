@@ -141,6 +141,46 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   return ats;
  }
 
+//DEX CONTROLS
+// - taken directly from scaffold eth challenge
+    function price(
+        uint256 xInput,
+        uint256 xReserves,
+        uint256 yReserves
+    ) public view returns (uint256 yOutput) {
+        uint256 xInputWithFee = xInput.mul(997);
+        uint256 numerator = xInputWithFee.mul(yReserves);
+        uint256 denominator = (xReserves.mul(1000)).add(xInputWithFee);
+        return (numerator / denominator);
+    }
+    /**
+     * @notice sends chain token to DEX in exchange for $BAL
+     */
+    function ctToToken() public payable returns (uint256 tokenOutput) {
+        require(msg.value > 0, "cannot swap 0");
+        uint256 ethReserve = address(this).balance.sub(msg.value);
+        uint256 token_reserve = token.balanceOf(address(this));
+        uint256 tokenOutput = price(msg.value, ethReserve, token_reserve);
+
+        require(token.transfer(msg.sender, tokenOutput), "ethToToken(): reverted swap.");
+        emit EthToTokenSwap(msg.sender, "Eth to Balloons", msg.value, tokenOutput);
+        return tokenOutput;
+    }
+
+    /**
+     * @notice sends $BAL tokens to DEX in exchange for Ether
+     */
+    function tokenToCt(uint256 tokenInput) public returns (uint256 ethOutput) {
+        require(tokenInput > 0, "cannot swap 0 tokens");
+        uint256 token_reserve = token.balanceOf(address(this));
+        uint256 ethOutput = price(tokenInput, token_reserve, address(this).balance);
+        require(token.transferFrom(msg.sender, address(this), tokenInput), "tokenToEth(): reverted swap.");
+        (bool sent, ) = msg.sender.call{ value: ethOutput }("");
+        require(sent, "tokenToEth: revert in transferring eth to you!");
+        emit TokenToEthSwap(msg.sender, "Balloons to ETH", ethOutput, tokenInput);
+        return ethOutput;
+    }
+
 //INTERNAL CONTROLS
 //
   //account for this token type
