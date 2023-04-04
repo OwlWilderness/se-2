@@ -24,15 +24,15 @@ import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I n
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract CryptoGenDEX is Ownable, ERC1155Holder {
+contract dGenDEX is Ownable, ERC1155Holder {
 
-  string public name = "Crypto Gen DEX";
-  string public symbol = "CGDX";
+  string public name = "dGen DEX";
+  string public symbol = "dGDX";
 
 //EXTERNAL CONTRACTS...
 //
   ERC1155 public togs; //cogs in the machine - pieces of the machine #gotf
-  IERC20 public genx;
+  IERC20 public dgenx;
 
 //PUBLIC VARIABLES
 //
@@ -59,7 +59,7 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
   struct share{
     address operator;  //address using the dex (could be this contract address)
     uint256 balchain;  //balance of chain token
-    uint256 balgendx;  //balance of gendex token
+    uint256 baldgenx;  //balance of dgen ex token
     mapping(address => mapping(uint256 => uint256)) bal1155; //address of 1155 token => ooff:{1155 token id => Amount of Id}
     //mapping(address => uint256) bal20; 
   }
@@ -86,11 +86,14 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
 //EVENTS
 //
   event AddShareEvent(address operator, address token, uint256[] ids, uint256[] vals);
+  event TokenToCtSwap(address sender, string message, uint256 ctOutput, uint256 dGenXInput);
+  event CtToTokenSwap(address sender, string message, uint256 value, uint256 dGenXOutput);
+
 
 //CONSTRUCTOR
 //
   constructor(address token_addr, address togs_addr) {
-    genx = IERC20(token_addr);
+    dgenx = IERC20(token_addr);
     togs = ERC1155(togs_addr);
 
   }
@@ -154,31 +157,33 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
         return (numerator / denominator);
     }
     /**
-     * @notice sends chain token to DEX in exchange for $BAL
+     * @notice sends chain token to DEX in exchange for $dGenX
+     
+     * @notice ct - chain token
      */
     function ctToToken() public payable returns (uint256 tokenOutput) {
-        require(msg.value > 0, "cannot swap 0");
-        uint256 ethReserve = address(this).balance.sub(msg.value);
-        uint256 token_reserve = token.balanceOf(address(this));
-        uint256 tokenOutput = price(msg.value, ethReserve, token_reserve);
+        require(msg.value > 0, "cannot swap 0 ETH");
+        uint256 ctReserve = address(this).balance.sub(msg.value);
+        uint256 token_reserve = dgenx.balanceOf(address(this));
+        uint256 tokenOutput = price(msg.value, ctReserve, token_reserve);
 
-        require(token.transfer(msg.sender, tokenOutput), "ethToToken(): reverted swap.");
-        emit EthToTokenSwap(msg.sender, "Eth to Balloons", msg.value, tokenOutput);
+        require(token.transfer(msg.sender, tokenOutput), "ctToToken(): reverted swap.");
+        emit CtToTokenSwap(msg.sender, "Chain Token to dGenX", msg.value, tokenOutput);
         return tokenOutput;
     }
 
     /**
-     * @notice sends $BAL tokens to DEX in exchange for Ether
+     * @notice sends $dGenX tokens to DEX in exchange for Ether
      */
-    function tokenToCt(uint256 tokenInput) public returns (uint256 ethOutput) {
+    function tokenToCt(uint256 tokenInput) public returns (uint256 ctOutput) {
         require(tokenInput > 0, "cannot swap 0 tokens");
-        uint256 token_reserve = token.balanceOf(address(this));
-        uint256 ethOutput = price(tokenInput, token_reserve, address(this).balance);
-        require(token.transferFrom(msg.sender, address(this), tokenInput), "tokenToEth(): reverted swap.");
-        (bool sent, ) = msg.sender.call{ value: ethOutput }("");
-        require(sent, "tokenToEth: revert in transferring eth to you!");
-        emit TokenToEthSwap(msg.sender, "Balloons to ETH", ethOutput, tokenInput);
-        return ethOutput;
+        uint256 token_reserve = dgenx.balanceOf(address(this));
+        uint256 ctOutput = price(tokenInput, token_reserve, address(this).balance);
+        require(dgenx.transferFrom(msg.sender, address(this), tokenInput), "tokenToCt(): reverted swap.");
+        (bool sent, ) = msg.sender.call{ value: ctOutput }("");
+        require(sent, "tokenToCt: revert in transferring eth to you!");
+        emit TokenToCtSwap(msg.sender, "dGenx to Chain Token", ctOutput, tokenInput);
+        return ctOutput;
     }
 
 //INTERNAL CONTROLS
@@ -228,11 +233,11 @@ contract CryptoGenDEX is Ownable, ERC1155Holder {
     require(totalLiquidity==0,"DEX:init - already has liquidity");
     totalLiquidity = address(this).balance;
 
-    require(genx.transferFrom(msg.sender, address(this), tokenAmt));
+    require(dgenx.transferFrom(msg.sender, address(this), tokenAmt));
 
     Shares[msg.sender].operator = msg.sender;
     Shares[msg.sender].balchain = address(this).balance;
-    Shares[msg.sender].balgendx = genx.balanceOf(address(this));
+    Shares[msg.sender].baldgenx = gdenx.balanceOf(address(this));
 
     return Shares[msg.sender].balchain;
   }
