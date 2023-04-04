@@ -26,7 +26,9 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract dGenDEX is Ownable, ERC1155Holder {
 
-  string public name = "dGen DEX";
+  using SafeMath for uint256; //outlines use of SafeMath for uint256 variables
+
+  string public name = "dGenDEX";
   string public symbol = "dGDX";
 
 //EXTERNAL CONTRACTS...
@@ -167,7 +169,7 @@ contract dGenDEX is Ownable, ERC1155Holder {
         uint256 token_reserve = dgenx.balanceOf(address(this));
         uint256 tokenOutput = price(msg.value, ctReserve, token_reserve);
 
-        require(token.transfer(msg.sender, tokenOutput), "ctToToken(): reverted swap.");
+        require(dgenx.transfer(msg.sender, tokenOutput), "ctToToken(): reverted swap.");
         emit CtToTokenSwap(msg.sender, "Chain Token to dGenX", msg.value, tokenOutput);
         return tokenOutput;
     }
@@ -237,7 +239,7 @@ contract dGenDEX is Ownable, ERC1155Holder {
 
     Shares[msg.sender].operator = msg.sender;
     Shares[msg.sender].balchain = address(this).balance;
-    Shares[msg.sender].baldgenx = gdenx.balanceOf(address(this));
+    Shares[msg.sender].baldgenx = dgenx.balanceOf(address(this));
 
     return Shares[msg.sender].balchain;
   }
