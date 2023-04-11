@@ -21,7 +21,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("CryptoGenX", {
+  await deploy("dGenX", {
     from: deployer,
     // Contract constructor arguments
     //args: [deployer],
@@ -32,7 +32,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   });
 
   // Get the deployed contract
-  const cryptoGenX = await hre.ethers.getContract("CryptoGenX", deployer);
+  const cryptoGenX = await hre.ethers.getContract("dGenX", deployer);
 
   const owner = "0x8fa282757D6CC54812E56EE3E90561F6E373f17e";
   await deploy("CryptogsRebornGenesis", {
@@ -55,6 +55,8 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   const dGenDEX = await hre.ethers.getContract("dGenDEX", deployer);
 
+  await cryptoGenX.init(dGenDEX.address);
+
   await cryptoGenX.transferOwnership(owner);
 
   await cryptogsRebornGenesis.transferOwnership(owner);
@@ -66,4 +68,4 @@ export default deployYourContract;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags CryptoGenDEX
-deployYourContract.tags = ["CryptoGenX", "CryptogsRebornGenesis", "dGenDEX"];
+deployYourContract.tags = ["dGenX"]; //, "CryptogsRebornGenesis", "dGenDEX"];

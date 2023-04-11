@@ -6,7 +6,8 @@ pragma solidity >=0.8.0 <0.9.0;
 ///@author   quantumtekh.eth
 ///@repo:    https://github.com/OwlWilderness/se-2/tree/se2h
 ///@notice   dex to support 1155 cryptog tokens
-///@notice   some code from: https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex         
+///@notice   source repos
+///          https://github.com/scaffold-eth/scaffold-eth-examples/blob/signature-recover/packages/hardhat/contracts/YourContract.sol
 */
 
 ///imports...
@@ -24,7 +25,28 @@ import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol"; //do I n
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract dGenDEX is Ownable, ERC1155Holder {
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+
+/**
+ * @title ERC20 token receiver interface
+ * @dev Interface for any contract that wants to support safeTransfers
+ * from ERC20 asset contracts.  Based on the IERC721Receiver code.
+ */
+interface IERC20Receiver {
+    /**
+     * @dev Whenever an {IERC20} amount is transferred to this contract from `from`, this function is called.
+     *
+     * It must return true to confirm the token transfer.
+     * If false is returned the transfer will be reverted.
+     *
+     * The selector can be obtained in Solidity with `IERC20Receiver.onERC20Received.selector`.
+     */
+    function onERC20Received(address from, uint amount, address erc20) external returns (bool);
+}
+
+contract dGenDEX is Ownable, ERC1155Holder, IERC20Receiver {
+
+  using ECDSA for bytes32;
 
   using SafeMath for uint256; //outlines use of SafeMath for uint256 variables
 
@@ -65,7 +87,57 @@ contract dGenDEX is Ownable, ERC1155Holder {
     mapping(address => mapping(uint256 => uint256)) bal1155; //address of 1155 token => ooff:{1155 token id => Amount of Id}
     //mapping(address => uint256) bal20; 
   }
+
+
+  //trade address, shares
+  //trade id -> [tas1,tas2]
+  //
+  //token address, token id, token amount
+  //address of creator
+  //address of consumer
+
+  //available trades
+  //mapping of trade ids -> trade
+
+enum theta {
+  ZZTOP, //cancelled 
+  TAKEN, //accepted
+  PHISH //looking/open
+}
+
+enum delta {
+  NOGEN,  // no action or waiting required
+  REGEN,  // waiting on regen address
+  DEGEN,  // waiting on degen address
+  GENX    // waiting on all gen address
+}
+
+///from conversation @ aifrens.io #aifrens
+///>>could you provide the website for The Taken: A band that has taken upon themselves the responsibility and promise, implying acceptance within a community.
+//I apologize for any confusion, but it appears that "The Taken" band I mentioned earlier may not actually exist as a real band. My previous suggestions were intended as creative ideas rather than referencing specific existing bands. However, I can attempt to find a real band with a related theme or name for you to explore. Please let me know if you'd like me to do that.
+//>>yes please - thank you
+//apologize for the misunderstanding earlier. Upon further research, I found a band called "Taken" (without "The") that has a similar theme to the one I previously mentioned. Taken is a post-hardcore/emo band from the United States that was active in the early 2000s. They convey a sense of unity and responsibility, which implies acceptance within a community like the earlier description. You can learn more about the band on their official Facebook page: https://www.facebook.com/takenca
+//Please keep in mind that the name may not have the exact same meaning as the earlier example, but the shared theme and name might interest you. Let me know if you'd like more information or suggestions for different bands.
+struct order {
+  uint256 id; //id of this offer
+  address regen; //address for creator of this offer
+  address degen; //address for the acceptor of this offer
+  uint256 tshare; //t-share id of the item for trade
+  uint256 ftshare; //(found) t-share id of the item being accepted - this could be entered by any party (and could be a ft of another offer??)
+  theta status; /// status of this offer (open, accepted, canceled)
+  delta state; //state of this offer (what address has not signed)
+  bytes32 hash; ///need hash to make we sure we have 2 valid signatures for acceptance
+}
   
+
+  function getHash( uint256 _nonce, address to, uint256 value ) public view returns (bytes32) {
+    return keccak256(abi.encodePacked(address(this),_nonce,to,value));
+  }
+
+  function recover(bytes32 hash, bytes memory signature) public pure returns (address) {
+    return hash.toEthSignedMessageHash().recover(signature);
+  }
+
   //address token amount structure - used in views
   struct atamt{
     address t;
@@ -83,6 +155,8 @@ contract dGenDEX is Ownable, ERC1155Holder {
   mapping (address => uint256) public maxTokenIds; //token address => (token id => token amount)
   mapping (address => uint256) public countForAddr; //token address => total count of tokens 
   mapping(address => share) public Shares; //shares each operator holds
+  mapping (uint256 => share) public tShares; //share avaialbe for trade
+  mapping (uint256 => order) public  Orders; //order id -> order
   mapping(uint256 => address) public id1155; //id => 1155 token address
 
 //EVENTS
@@ -318,5 +392,23 @@ contract dGenDEX is Ownable, ERC1155Holder {
         add1155Share(operator, msg.sender, ids, values);
         return this.onERC1155BatchReceived.selector;
     }
+    
+    function add20Share(address from, address sender, uint amount, address erc20) internal returns(bool){
+      
+      return true;
+    }
+    
+    function onERC20Received(address from, uint amount, address erc20) public override returns (bool) {
+        LastOperator = address(0);
+        LastFrom = from;
+        LastAction = "onERC20Received";
+        LastMsgSender = msg.sender;
+      return add20Share(from, msg.sender, amount, erc20);
+         
+    }
 
+    //for these on recieved events - i am wondering if it wond work - they are public functions so anyone could call them - i wonder if there is a way to validate it is being called
+    //from the recivier ??
 }
+
+
