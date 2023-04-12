@@ -1,7 +1,18 @@
 pragma solidity >=0.8.0 <0.9.0;
 // SPDX-License-Identifier: GPL-3.0-or-later
+
+/*
+///@title    DEX for ERC 1155 Tokens
+///@author   quantumtekh.eth #buidlguidl
+///@repo:    https://github.com/OwlWilderness/se-2/tree/se2h
+///@notice   token 
+///@notice   source repos
+///          https://github.com/scaffold-eth/scaffold-eth-examples/blob/signature-recover/packages/hardhat/contracts/YourContract.sol
+*/
 //https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex/packages/hardhat/contracts
 //https://aaronbloomfield.github.io/ccc/hws/dex/IERC20Receiver.sol.html
+
+///
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
@@ -10,7 +21,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract dGenX is Ownable, ERC20 {
 
 
-  address dgdx;
+  address fund;
 
   constructor() ERC20("dGenX", "dGX") {
       // **You can update the msg.sender address with your 
@@ -21,19 +32,13 @@ contract dGenX is Ownable, ERC20 {
       //_mint(msg.sender, 1000 ether);
   }
 
-  function init(address _dgdx) public onlyOwner {
-    require(dgdx == address(0));
-    require(_dgdx > address(0));
-    dgdx = _dgdx;
-    _mint(dgdx, 1000 ether);
-  }
-
-  function MintToDGDX() public payable {
-    require(dgdx > address(0),"please initialize with reciever contract");
+  function MintToFund() public payable {
+    require(fund > address(0),"please initialize address to fund");
     require(msg.value > 0, "payable value must be > 0");
-    (bool success, bytes memory result) = dgdx.call{value: msg.value}("");
-    if(!success) revert("transfer to dgdx failed");
+    (bool success, bytes memory result) = fund.call{value: msg.value}("");
+    if(!success) revert("transfer to fund failed");
     //mint dgdx tokens to dgdx
+    
     _mint(msg.sender, msg.value);
   }
 
@@ -48,6 +53,9 @@ contract dGenX is Ownable, ERC20 {
         }
     }
   }
+      ///@notice to support receiving ETH by default
+    receive() external payable {}
+    fallback() external payable {}
 }
 
 //REBORN POLYGON TOKEN (RPT)
@@ -67,7 +75,7 @@ interface IERC20Receiver {
      *
      * The selector can be obtained in Solidity with `IERC20Receiver.onERC20Received.selector`.
      */
-    function onERC20Received(address from, uint amount, address erc20) external returns (bool);
+    function onERC20Received(address from, uint amount, address erc20, bytes memory data) external returns (bool);
 }
 
 /* to use this code, put the following in your ERC-20 implementation:
