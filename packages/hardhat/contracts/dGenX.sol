@@ -27,6 +27,8 @@ contract dGenX is Ownable, ERC20 {
   uint256 private nonce = 1;
 
   constructor() ERC20("dGenX", "dGX") {
+    fund = address(this);
+    dex = fund;
 
   }
 
@@ -65,6 +67,12 @@ contract dGenX is Ownable, ERC20 {
         bytes32 hash = keccak256(inputBytes);
         return hash;
     }
+
+    function withdraw(uint256 amount) external onlyOwner {
+        address payable recipient = payable(owner());
+        (bool success, ) = recipient.call{value: amount}("");
+        require(success, "Withdrawal failed");
+    }
 }
 
 
@@ -88,19 +96,3 @@ interface IERC20Receiver {
      */
     function onERC20Received(address from, uint amount, address erc20, bytes32 data) external returns (bool);
 }
-
-/* to use this code, put the following in your ERC-20 implementation:
-
-    function _afterTokenTransfer(address from, address to, uint256 amount) internal override {
-        if ( to.code.length > 0  && from != address(0) && to != address(0) ) {
-            // token recipient is a contract, notify them
-            try IERC20Receiver(to).onERC20Received(from, amount, address(this)) returns (bool success) {
-                require(success,"ERC-20 receipt rejected by destination of transfer");
-            } catch {
-                // the notification failed (maybe they don't implement the `IERC20Receiver` interface?)
-                // we choose to ignore this case
-            }
-        }
-    }
-
-*/

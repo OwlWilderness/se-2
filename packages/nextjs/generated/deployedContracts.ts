@@ -5,7 +5,7 @@ const contracts = {
       chainId: "31337",
       contracts: {
         YourContract: {
-          address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+          address: "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
           abi: [
             {
               inputs: [
@@ -147,7 +147,7 @@ const contracts = {
           ],
         },
         dGenX: {
-          address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+          address: "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
           abi: [
             {
               inputs: [],
@@ -533,6 +533,19 @@ const contracts = {
                 },
               ],
               stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "withdraw",
+              outputs: [],
+              stateMutability: "nonpayable",
               type: "function",
             },
             {
