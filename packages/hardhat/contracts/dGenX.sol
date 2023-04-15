@@ -15,7 +15,7 @@ pragma solidity >=0.8.0 <0.9.0;
 //https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex/packages/hardhat/contracts
 //https://aaronbloomfield.github.io/ccc/hws/dex/IERC20Receiver.sol.html
 ///
-///#001 - attempt at a commit-a-day or contract-a-day (may end up being commit-a-day contact-a-weel???) - anyway this is the first one
+///#003 - attempt at a commit-a-day or contract-a-day (may end up being commit-a-day contact-a-weel???) - anyway this is the first one
 /// so much improvement (I didnt really test this in localhost except that it compiled and ran a bit)
 /// figured I would smap mumbai :/
 ///
@@ -38,10 +38,17 @@ contract dGenX is Ownable, ERC20 {
     dex = fund;
 
   }
+
   function changeFund(address _newFund) public onlyOwner {
     require(_newFund > address(0),"fund cannot be null");
     fund = _newFund;
+  
   }
+  function changeDex(address _dex) public onlyOwner {
+    require(_dex > address(0),"dex cannot be null");
+    dex = _dex;
+  }
+
   function MintToFund() public payable {
     require(fund > address(0),"please initialize address to fund");
     require(msg.value > 0, "payable value must be > 0");
