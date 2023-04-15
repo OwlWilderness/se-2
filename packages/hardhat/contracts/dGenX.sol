@@ -1,25 +1,32 @@
 pragma solidity >=0.8.0 <0.9.0;
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: MIT
 
 /*
 ///@title    dgenx token for use with togdex
 ///@author   quantumtekh.eth #buidlguidl
+///          quantumtekh.polygon
 ///@repo:    https://github.com/OwlWilderness/se-2/tree/se2h
 ///@notice   token 
 ///@notice   source repos
 ///          https://github.com/scaffold-eth/scaffold-eth-examples/blob/signature-recover/packages/hardhat/contracts/YourContract.sol
 */
+
+//some references
 //https://github.com/OwlWilderness/scaffold-eth-challenges/tree/challenge-5-dex/packages/hardhat/contracts
 //https://aaronbloomfield.github.io/ccc/hws/dex/IERC20Receiver.sol.html
-
 ///
+///#001 - attempt at a commit-a-day or contract-a-day (may end up being commit-a-day contact-a-weel???) - anyway this is the first one
+/// so much improvement (I didnt really test this in localhost except that it compiled and ran a bit)
+/// figured I would smap mumbai :/
+///
+/// 713
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract dGenX is Ownable, ERC20 {
 
-  address fund; //address to fund during minting
+  address public fund; //address to fund during minting
   address dex; //address of the dex this token is associated with
 
   mapping(address => bytes32) private nkey;
@@ -31,7 +38,10 @@ contract dGenX is Ownable, ERC20 {
     dex = fund;
 
   }
-
+  function changeFund(address _newFund) public onlyOwner {
+    require(_newFund > address(0),"fund cannot be null");
+    fund = _newFund;
+  }
   function MintToFund() public payable {
     require(fund > address(0),"please initialize address to fund");
     require(msg.value > 0, "payable value must be > 0");
