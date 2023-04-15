@@ -10,12 +10,13 @@ import "hardhat/console.sol";
  * A smart contract that allows changing a state variable of the contract and tracking the changes
  * It also allows the owner to withdraw the Ether in the contract
  * @author BuidlGuidl
+ * modifed by quantumtekh.polygon
  */
-contract YourContract {
+contract HelloUniverse {
 
     // State Variables
     address public immutable owner;
-    string public greeting = "Building Unstoppable Apps!!!";
+    string public greeting = "hello universe on polygon";
     bool public premium = false;
     uint256 public totalCounter = 0;
     mapping(address => uint) public userGreetingCounter;
