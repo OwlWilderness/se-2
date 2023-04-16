@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity >=0.8.0 <0.9.0;
 
 //quantumtekh.eth #quantumtekh.polygon #buidlguild
 //code taken from this repo: https://github.com/OwlWilderness/scaffold-eth/blob/chaotic-1155-staker/packages/hardhat/contracts/Chaotic1155.sol
@@ -20,7 +20,7 @@ pragma solidity ^0.8.4;
     import 'base64-sol/base64.sol';
     import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
+contract Buidl  is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
 //Usings...
 //
@@ -28,9 +28,14 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     using ToColor for bytes3;
 //Mappings...
 //
+    struct info {
+        string repo;
+        string commit;
+    }
     //buidl info
-    mapping (uint => string) public repo;
-    mapping (uint => string) public commit;
+    mapping (uint => info) public Info;
+    
+   
 
     //svg  
     mapping (uint => string) public AttributesString4Token; //tokenId => Attributes '[{}]'   
@@ -40,7 +45,7 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 //Public Variables...
 //
     uint public MaxTokenId = 32;
-    uint public MaxForTokenIds = 10240;
+    uint public MaxForTokenIds = 23;
     uint public LastMintedTokenId = 0;
     uint public Price = 1;
     uint public TotalSupply = 0;
@@ -82,11 +87,11 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     }
 
 //views
-    function getRepo(uint id) public view returns(string){
-        return repo[id];
+    function getRepo(uint id) public view returns(string memory){
+        return string(Info[id].repo);
     }
-    function getCommit(uint id) public view returns(string){
-        return commit[id];
+    function getCommit(uint id) public view returns(string memory){
+        return string(Info[id].commit);
     }
 
 //Token Controllers...
@@ -121,7 +126,7 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
 //Minting ...
 //
-    function mintItem(uint amount, string repo, string commit) public payable {
+    function mintItem(uint amount, string memory repo, string memory commit) public payable {
         //require sent amout meets price requirement
         require(amount > 0, "mint amount must be > 0");
         require(msg.value >= (Price * amount), "not enough funds");
@@ -138,8 +143,8 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
         _mint(msg.sender, id, amount, "");
         TotalSupply = TotalSupply + amount;
-        repo[id] = repo;
-        commit[id] = commit;
+        Info[id] = info(repo,commit);
+
 
         Initialize(id);
         LastMintedTokenId = id;
@@ -166,7 +171,7 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         bytes3 colorBytes = bytes2(predictableRandom[0]) | ( bytes2(predictableRandom[1]) >> 8 ) | ( bytes3(predictableRandom[2]) >> 16 );
         
         SvgStringNum4Token[id][1] = string(abi.encodePacked('<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#',colorBytes.toColor(),'" />'));
-        SvgStringNum4Token[id][2] = string(abi.encodePacked('<text x="40" y="55" fill="yellow">',commit[id],'</text>'));
+        SvgStringNum4Token[id][2] = string(abi.encodePacked('<text x="40" y="55" fill="yellow">',uint2str(id),'</text>'));
     }
 
     //https://ethereum.stackexchange.com/questions/15641/how-does-a-contract-find-out-if-another-address-is-a-contract
@@ -199,8 +204,8 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         string memory supply = uint2str(totalSupply(id));
 
         //string memory regen4id = uint2str(GetRegenForId(id));
-        string memory nftname = string(abi.encodePacked('Chaotic 1155 - ',uint2str(id)));
-        string memory description = string(abi.encodePacked('Chaotic 1155 #',uint2str(id), ' Supply: ',supply));
+        string memory nftname = string(abi.encodePacked('BDL #',uint2str(id)));
+        string memory description = string(abi.encodePacked('Buidl (BDL) #',uint2str(id), ' Commit:',Info[id].commit,' Repo:', Info[id].repo, ' Supply: ',supply));
         string memory image = Base64.encode(bytes(GenerateSVGofTokenById(id)));
 
         return
@@ -214,9 +219,7 @@ contract Chaotic1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
                                 nftname,
                                 '", "description":"',
                                 description,
-                                '", "attributes": [{"trait_type": "supply", "value": "',
-                                uint2str(totalSupply(id)),
-                                '"}',
+                                '", "attributes":',
                                 AttributesString4Token[id],
                                 '], "image": "',
                                 'data:image/svg+xml;base64,',
