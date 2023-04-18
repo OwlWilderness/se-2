@@ -46,9 +46,9 @@ export const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink href="/example-ui">
+        <NavLink href="/buidl-ui">
           <SparklesIcon className="h-4 w-4" />
-          Example UI
+          Buidl UI
         </NavLink>
       </li>
     </>
