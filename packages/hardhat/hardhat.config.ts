@@ -81,6 +81,30 @@ const config: HardhatUserConfig = {
       apiKey: `${etherscanApiKey}`,
     },
   },
+  etherscan: {
+    apiKey: {
+      polygonZkEvm: `${etherscanApiKey}`,
+      polygonZkEvmTestnet: `${etherscanApiKey}`,
+    },
+    customChains: [
+      {
+        network: "polygonZkEvmTestnet",
+        chainId: 1442,
+        urls: {
+          apiURL: "https://api-testnet-zkevm.polygonscan.com/api",
+          browserURL: "https://testnet-zkevm.polygonscan.com",
+        },
+      },
+      {
+        network: "polygonZkEvm",
+        chainId: 1101,
+        urls: {
+          apiURL: "https://api-zkevm.polygonscan.com/api",
+          browserURL: "https://zkevm.polygonscan.com",
+        },
+      },
+    ],
+  },
 };
 
 export default config;
