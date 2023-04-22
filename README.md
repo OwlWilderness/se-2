@@ -1,3 +1,78 @@
+# buidl dex (bdldx)
+## Overveiw
+This document will describe the creation of a pool / exchange for buidl tokens.  
+
+
+## Contracts
+Associated contracts
+- [Buidl (BDL) - Build Tracking and Ownership Token] (https://polygonscan.com/address/0x15c395ebc9dac320f839cc08767385d2fd53f221#code)
+- BdldX (BDLDX) - Buidl Token Exchange
+
+## Buidl Exchange
+- Name - BdldX
+### Functionality
+- Allow Pools of Buidl Tokens
+  - allow token owner to create new pool
+    - allow a pool of one or more token ids
+    - multiple pools could be created with the same token id
+  - allow operator to fund a pool with matic
+    - funding does not need to follow a price function
+  - allow token owner lock for X time to pool
+  - allow token owner to sell token to pool
+    - simple price funciton: token value = total pool value / total tokens in pool
+  - support deposit lock of pool
+  - support withdrawel lock (i.e. if pools funded before project starts)
+
+### Use Case
+- Devloper Mints original and additional tokens to contributors. Developer and contributors deposit tokens in pool. Pool is funded after project completes and devleoper and contributors are able to withdraw based on tokens in pool.
+- Sponsor mints a token to a team and funds a pool - 
+
+
+## Buidl Token (Exists)
+The Buidl token is an ERC1155 token on polygon and is associated with a code repo and specific commit (set during minting of a new id)
+
+[BDL on Opensea](https://opensea.io/collection/buidl-3)
+
+### Use Cases 
+- Developer mints token (new) to track builds and mints additional to sell to fund devleopment
+- Sponser mints token (new) and mints additional to devleoper to perform work
+- Developer mints additional tokens to colaborators
+- Token Gate beta testing to hodlers of a specific id
+
+### Functionality 
+- Mint Item - Mint new token id passing in address, ammount, repo and commit
+- Mint - Any owner of a token id may mint more (up to max) to an address
+- Set Attributes - owner may set the metadata
+- Set SVG strings - owner may change the svg strings (ID will be added)
+
+### Properties
+#### Immutable 
+- Info (repo and commit) - (contained in the discription of the token)
+- SVG of ID on Token (will always be added)
+
+#### Modifiyable after mint
+##### By Collection Owner
+- Max Token Id = 32 
+- Max Amount of each Token = 23
+- Price = 1 Matic
+##### By Token Owner
+- SVG of Token (see above re ID)
+- Metadata (examples of current traits
+  - name - contract name
+  - chain - chain contract is deployed on
+  - contract - contract address
+  - verified - true if contract is verified
+  - web2 - demo website for project
+  - item - github issue reference
+  - pr - gitub pr reference
+
+### Next Version 
+- individual max for each token
+- fix attributes 
+- allow linked BDL
+
+
+
 # 🏗 Scaffold-ETH 2
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
