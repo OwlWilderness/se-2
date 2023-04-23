@@ -46,11 +46,25 @@ Associated contracts
  - link -> pool id
 
 1155 receiver contract - 
+- id
 - link -> owner
 - data
  - id 
  - amt
  - link -> container id
+ - data
+
+
+##### Data Contract
+if this is a token recieve contract is the id and amout required - it will take care of tracking that.
+- uint256 id 
+- uint256 amt 
+- address owner
+- address link
+- address data 
+- mapping(address => uint256) awl //address whitelist 
+- mapping(uint256 => uint256) iwl //id whitelist
+
 
 
 
