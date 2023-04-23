@@ -27,6 +27,34 @@ Associated contracts
 - Devloper Mints original and additional tokens to contributors. Developer and contributors deposit tokens in pool. Pool is funded after project completes and devleoper and contributors are able to withdraw based on tokens in pool.
 - Sponsor mints a token to a team and funds a pool - 
 
+### Design
+#### info object
+- data 
+ - id
+ - link
+
+#### pool object 
+- data
+  - id
+  - info 
+  - link -> __ id
+
+#### container to hold token ids 
+- new container 
+ - id
+ - wl //whitelist
+ - link -> pool id
+
+1155 receiver contract - 
+- link -> owner
+- data
+ - id 
+ - amt
+ - link -> container id
+
+
+
+#### 
 
 ## Buidl Token (Exists)
 The Buidl token is an ERC1155 token on polygon and is associated with a code repo and specific commit (set during minting of a new id)
