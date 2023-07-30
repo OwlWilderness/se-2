@@ -1,3 +1,23 @@
+# Buidl Guidl Infinity Key Puzzle Integration
+
+- The intention of this repo is to contain information and ideas related to the integration of a Buidl Guidl puzzleline into Infinity Keys.
+- The Buidl Guidl stream for quantumtekh.eth will be directed towards the IK team
+- This repo will be updated as the project progresss 
+
+## Summary
+- [Buidl Guidl](https://buidlguidl.com/) - A curated group of Ethereum builders creating products, prototypes, and tutorials to enrich the web3 ecosystem.
+- [Infinity Keys](https://www.infinitykeys.io/) - Infinity Keys is gaming infrastructure for user-created missions that link to analog or digital experiences.
+
+## Integration
+this section will contain ideas for content
+
+### Key Hunts
+- build guild mirror articles
+- development mirror articles
+### Builds
+- complete a speed run ethereum quest
+- deploy to multiple chains (base, op, polygon/zkevm, gnosis
+
 # 🏗 Scaffold-ETH 2
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
