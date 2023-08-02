@@ -17,18 +17,27 @@ this section will contain ideas for content
 ### Builds
 - complete a speed run ethereum quest
 - deploy to multiple chains (base, op, polygon/zkevm, gnosis
-
+- SAN [redacted] puzzles
+  
 # Notable Accounts / Addresses 
 - Safe Mulisig : https://etherscan.io/address/0xcf52303f4452de99a09e978784a0429608496b60
 - Infinity Keys : https://opensea.io/0xd4076b05a720d263993bc5801d74692d1588c68a
 - quantumtekh.eth : https://etherscan.io/address/0x1A4c2B35c9B4CC9F9A833A43dBe3A78FDB80Bb54
 
 # Transactions
-
 ## 2023 Jul 30
 - Quantumtekh.eth Stream Withdrawal for IK Aug Dev https://etherscan.io/tx/0xd4ce44a7ac32151c0806ec412210200f1f50b045c86f742704765dd4f706caf7
 - Buidl Infinity Keys Guidl Safe created - https://etherscan.io/tx/0xfdb26bda718c40bc77a4055ed65d2e91bef1f9b183e777b701c4b32df420057b
 - Quantumtekh.eth transfer to BIKGS - https://etherscan.io/tx/0x3b2a804cbcd7a623c9848fa1a275b3195aac23ef01f29b7b133b3b4e372c602d
+
+## 2023 Aug 01
+- gametekh.cb.id tranfer SAN Origin token (Light Cro, Data, Keys) - https://etherscan.io/tx/0x57688c9acad90590eee21a8c72d564d148ffe9f4cee4cc3d735841313325bae8
+- gametekh.cb.id transfer .1 eth for use to soulbind SAN token - https://etherscan.io/tx/0x4c2394d224e5417ea8f52b8249f38b4a1f5e23c4ab684a26bf4ce82bc4159109
+
+# Acounting Allocations
+- Buidl Guidl Integration .4E
+- SAN Origin Bind .1E
+  
 # 🏗 Scaffold-ETH 2
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
