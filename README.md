@@ -34,9 +34,12 @@ this section will contain ideas for content
 - gametekh.cb.id tranfer SAN Origin token (Light Cro, Data, Keys) - https://etherscan.io/tx/0x57688c9acad90590eee21a8c72d564d148ffe9f4cee4cc3d735841313325bae8
 - gametekh.cb.id transfer .1 eth for use to soulbind SAN token - https://etherscan.io/tx/0x4c2394d224e5417ea8f52b8249f38b4a1f5e23c4ab684a26bf4ce82bc4159109
 
+## 2023 Aug 03
+- cb transfer .3 eth for use to soulbind SAN token - https://etherscan.io/tx/0xe9bc9c53dbf1f86ca893ed01b74d06a6716185f7820f2438cc16a7c6a9765fe6
+  
 # Acounting Allocations
 - Buidl Guidl Integration .4E
-- SAN Origin Bind .1E
+- SAN Origin Bind .4E
   
 # 🏗 Scaffold-ETH 2
 
