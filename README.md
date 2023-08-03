@@ -36,10 +36,15 @@ this section will contain ideas for content
 
 ## 2023 Aug 03
 - cb transfer .3 eth for use to soulbind SAN token - https://etherscan.io/tx/0xe9bc9c53dbf1f86ca893ed01b74d06a6716185f7820f2438cc16a7c6a9765fe6
+- quantumtekh.eth soulbind SAN Origin 3605 to Gnosis Safe - https://etherscan.io/tx/0x242857ac776cabfd5c8d91b148ab2c0f3affa8476367906e4159bd21557d5f22
   
-# Acounting Allocations
+# Acounting 
+## Allocations
 - Buidl Guidl Integration .5E
-- SAN Origin Bind .4E
+## Completed
+- SAN Origin Bind .4E (Completed)
+
+
   
 # 🏗 Scaffold-ETH 2
 
