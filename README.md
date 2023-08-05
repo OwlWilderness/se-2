@@ -1,3 +1,135 @@
+0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac
+
+# Your Gnostic Contract
+Scaffold Eth 2 YourContract deployed on Gnosis Chain using RPC of Home Gnosis Validator Node
+
+## Verified Contract
+- [Verified Contract 0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac](https://gnosisscan.io/address/0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac#code)
+## Demo Site
+- [Your Gnostic Contract Demo](https://your-gnostic-contract-owlwilderness.vercel.app/example-ui)
+
+# Reference
+## Gnosis Chain Documentation
+- [Configure Hardhat for Gnosis](https://docs.gnosischain.com/developers/smart-contracts/hardhat)
+- [Gnosis Faucet](https://www.gnosisfaucet.com/)
+## Hardhat Documentation
+- [Hardhat Verify](https://hardhat.org/hardhat-runner/plugins/nomicfoundation-hardhat-verify)
+## Mirror
+- [Git Worktree with Scaffold-Eth too](https://mirror.xyz/quantumtekh.eth/jnuL3guybvgeXBFShILuiA53Pq9igs4jFcqYZpSqMNo)
+  
+# Implementation
+## Hardhat Package Configuration
+- update verify to use "hardhat verify"
+```
+"verify": "hardhat verify"
+```  
+## Hardhat Configuration
+- Set default network to gnosis chain
+- update hardhat and mainnet uri
+- add gnosis and chiado networks
+  
+```
+...
+
+ defaultNetwork: "gnosis",
+  namedAccounts: {
+    deployer: {
+      // By default, it will take the first Hardhat account as the deployer
+      default: 0,
+    },
+  },
+  networks: {
+    // View the networks that are pre-configured.
+    // If the network you are looking for is not here you can add new network settings
+    hardhat: {
+      forking: {
+        url: `https://nethermind-nethermind-public.${tekhApiKey}.dyndns.dappnode.io`,
+        enabled: process.env.MAINNET_FORKING_ENABLED === "true",
+      },
+    },
+    gnosis: {
+      url: `https://nethermind-nethermind-xdai.${tekhApiKey}.dyndns.dappnode.io`,
+      accounts: [deployerPrivateKey],
+    },
+    chiado: {
+      url: "https://rpc.chiadochain.net",
+      gasPrice: 1000000000,
+      accounts: [deployerPrivateKey],
+    },
+    mainnet: {
+      url: `https://nethermind-nethermind-public.${tekhApiKey}.dyndns.dappnode.io`,
+      accounts: [deployerPrivateKey],
+    },
+...
+
+```
+- replace verify node with etherscan node with gnosis and chiado custom chains and api keys
+```
+...
+
+    zkSync: {
+      url: "https://mainnet.era.zksync.io",
+      zksync: true,
+      accounts: [deployerPrivateKey],
+      verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
+    },
+  },
+  etherscan: {
+    customChains: [
+      {
+        network: "chiado",
+        chainId: 10200,
+        urls: {
+          //Blockscout
+          apiURL: "https://blockscout.com/gnosis/chiado/api",
+          browserURL: "https://blockscout.com/gnosis/chiado",
+        },
+      },
+      {
+        network: "gnosis",
+        chainId: 100,
+        urls: {
+          // Gnosisscan
+          apiURL: "https://api.gnosisscan.io/api",
+          browserURL: "https://gnosisscan.io/",
+        },
+      },
+    ],
+    apiKey: {
+      //blockscout explorer verification does not require keys
+      chiado: "not-needed",
+      gnosis:  `${gnosisscanApiKey}`,
+    },
+  },
+
+  //verify: {
+  //  etherscan: {
+  //    apiKey: `${etherscanApiKey}`,
+  //  },
+  //},
+
+...
+
+```
+## Scaffold Configuration
+- Set the target network to gnosis chain
+```
+  targetNetwork: chains.gnosis,
+```
+# Deployment and Verification
+## Deploy
+- deploy to the gnosis network
+```
+yarn deploy --network gnosis
+```
+## Verify
+- verify contract on gnosis network passig contract address and constructor arguments
+```
+yarn verify --network gnosis 0x69a1582EFf9507f7b4FE2796EfD98C4eB67aB2ac "0x1a4c2b35c9b4cc9f9a833a43dbe3a78fdb80bb54"
+```
+---
+***
+___
 # 🏗 Scaffold-ETH 2
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
