@@ -11,7 +11,13 @@ import "hardhat/console.sol";
  * A smart contract that allows changing a state variable of the contract and tracking the changes
  * It also allows the owner to withdraw the Ether in the contract
  * @author BuidlGuidl
+ * 
+ * quantumtekh.eth: YourContract -> YourGnosticContract to deploy on gnossis chain. 
+ *		- updated hardhat.config.ts with gnosis rpc https://docs.gnosischain.com/developers/smart-contracts/hardhat		
+ *      - updated package.json to use verify and not etherscan-verify
+ *      - https://github.com/OwlWilderness/se-2/tree/your-gnostic-contract
  */
+
 contract YourGnosticContract {
 	// State Variables
 	address public immutable owner;

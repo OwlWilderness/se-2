@@ -24,7 +24,7 @@ const deployYourGnosticContract: DeployFunction = async function (hre: HardhatRu
   await deploy("YourGnosticContract", {
     from: deployer,
     // Contract constructor arguments
-    args: [deployer],
+    args: ["0x1a4c2b35c9b4cc9f9a833a43dbe3a78fdb80bb54"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.

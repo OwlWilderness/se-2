@@ -80,7 +80,7 @@ export const ContractInteraction = () => {
 
           <div className="mt-4 flex gap-2 items-start">
             <span className="text-sm leading-tight">Price:</span>
-            <div className="badge badge-warning">0.01 ETH + Gas</div>
+            <div className="badge badge-warning">0.01 xDAI + Gas</div>
           </div>
         </div>
       </div>
