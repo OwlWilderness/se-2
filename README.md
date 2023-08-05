@@ -68,7 +68,7 @@ Visit your app on: `http://localhost:3000`. You can interact with your smart con
 
 Run smart contract test with `yarn hardhat:test`
 
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
+- Edit your smart contract `YourGnosticContract.sol` in `packages/hardhat/contracts`
 - Edit your frontend in `packages/nextjs/pages`
 - Edit your deployment scripts in `packages/hardhat/deploy`
 
@@ -202,13 +202,13 @@ Use this hook to read public variables and get data from read-only functions of 
 
 ```ts
 const { data: totalCounter } = useScaffoldContractRead({
-  contractName: "YourContract",
+  contractName: "YourGnosticContract",
   functionName: "getGreeting",
   args: ["ARGUMENTS IF THE FUNCTION ACCEPTS ANY"],
 });
 ```
 
-This example retrieves the data returned by the `getGreeting` function of the `YourContract` smart contract. If the function accepts any arguments, they can be passed in the args array. The retrieved data is stored in the `data` property of the returned object.
+This example retrieves the data returned by the `getGreeting` function of the `YourGnosticContract` smart contract. If the function accepts any arguments, they can be passed in the args array. The retrieved data is stored in the `data` property of the returned object.
 
 ### useScaffoldContractWrite:
 
@@ -216,7 +216,7 @@ Use this hook to send a transaction to your smart contract to write data or perf
 
 ```ts
 const { writeAsync, isLoading, isMining } = useScaffoldContractWrite({
-  contractName: "YourContract",
+  contractName: "YourGnosticContract",
   functionName: "setGreeting",
   args: ["The value to set"],
   // For payable functions, expressed in ETH
@@ -238,7 +238,7 @@ To send the transaction, you can call the `writeAsync` function returned by the 
 </button>
 ```
 
-This example sends a transaction to the `YourContract` smart contract to call the `setGreeting` function with the arguments passed in `args`. The `writeAsync` function sends the transaction to the smart contract, and the `isLoading` and `isMining` properties indicate whether the transaction is currently being processed by the network.
+This example sends a transaction to the `YourGnosticContract` smart contract to call the `setGreeting` function with the arguments passed in `args`. The `writeAsync` function sends the transaction to the smart contract, and the `isLoading` and `isMining` properties indicate whether the transaction is currently being processed by the network.
 
 ### useScaffoldEventSubscriber:
 
@@ -246,7 +246,7 @@ Use this hook to subscribe to events emitted by your smart contract, and receive
 
 ```ts
 useScaffoldEventSubscriber({
-  contractName: "YourContract",
+  contractName: "YourGnosticContract",
   eventName: "GreetingChange",
   // The listener function is called whenever a GreetingChange event is emitted by the contract.
   // It receives the parameters emitted by the event, for this example: GreetingChange(address greetingSetter, string newGreeting, bool premium, uint256 value);
@@ -256,7 +256,7 @@ useScaffoldEventSubscriber({
 });
 ```
 
-This example subscribes to the `GreetingChange` event emitted by the `YourContract` smart contract, and logs the parameters emitted by the event to the console whenever it is emitted. The `listener` function accepts the parameters emitted by the event, and can be customized according to your needs.
+This example subscribes to the `GreetingChange` event emitted by the `YourGnosticContract` smart contract, and logs the parameters emitted by the event to the console whenever it is emitted. The `listener` function accepts the parameters emitted by the event, and can be customized according to your needs.
 
 ### useScaffoldEventHistory:
 
@@ -268,7 +268,7 @@ const {
   isLoading: isLoadingEvents,
   error: errorReadingEvents,
   } = useScaffoldEventHistory({
-  contractName: "YourContract",
+  contractName: "YourGnosticContract",
   eventName: "GreetingChange",
   // Specify the starting block number from which to read events, this is a bigint.
   fromBlock: 31231n,
@@ -282,7 +282,7 @@ const {
 });
 ```
 
-This example retrieves the historical event logs for the `GreetingChange` event of the `YourContract` smart contract, starting from block number 31231 and filtering events where the premium parameter is true. The data property of the returned object contains an array of event objects, each containing the event parameters and (optionally) the block, transaction, and receipt data. The `isLoading` property indicates whether the event logs are currently being fetched, and the `error` property contains any error that occurred during the fetching process (if applicable).
+This example retrieves the historical event logs for the `GreetingChange` event of the `YourGnosticContract` smart contract, starting from block number 31231 and filtering events where the premium parameter is true. The data property of the returned object contains an array of event objects, each containing the event parameters and (optionally) the block, transaction, and receipt data. The `isLoading` property indicates whether the event logs are currently being fetched, and the `error` property contains any error that occurred during the fetching process (if applicable).
 
 ### useDeployedContractInfo:
 
@@ -301,27 +301,27 @@ Use this hook to get your contract instance by providing the contract name. It e
 For reading data or sending transactions, it's recommended to use `useScaffoldContractRead` and `useScaffoldContractWrite`.
 
 ```ts
-const { data: yourContract } = useScaffoldContract({
-  contractName: "YourContract",
+const { data: YourGnosticContract } = useScaffoldContract({
+  contractName: "YourGnosticContract",
 });
 // Returns the greeting and can be called in any function, unlike useScaffoldContractRead
-await yourContract?.read.greeting();
+await YourGnosticContract?.read.greeting();
 
 // Used to write to a contract and can be called in any function
 import { useWalletClient } from "wagmi";
 
 const { data: walletClient } = useWalletClient();
-const { data: yourContract } = useScaffoldContract({
-  contractName: "YourContract",
+const { data: YourGnosticContract } = useScaffoldContract({
+  contractName: "YourGnosticContract",
   walletClient,
 });
 const setGreeting = async () => {
   // Call the method in any function
-  await yourContract?.write.setGreeting(["the greeting here"]);
+  await YourGnosticContract?.write.setGreeting(["the greeting here"]);
 };
 ```
 
-This example uses the `useScaffoldContract` hook to obtain a contract instance for the `YourContract` smart contract. The data property of the returned object contains the contract instance that can be used to call any of the smart contract methods.
+This example uses the `useScaffoldContract` hook to obtain a contract instance for the `YourGnosticContract` smart contract. The data property of the returned object contains the contract instance that can be used to call any of the smart contract methods.
 
 ## Disabling type and linting error checks
 

@@ -18,7 +18,7 @@ const Home: NextPage = () => {
             <code className="italic bg-base-300 text-base font-bold">packages/nextjs/pages/index.tsx</code>
           </p>
           <p className="text-center text-lg">
-            Edit your smart contract <code className="italic bg-base-300 text-base font-bold">YourContract.sol</code> in{" "}
+            Edit your smart contract <code className="italic bg-base-300 text-base font-bold">YourGnosticContract.sol</code> in{" "}
             <code className="italic bg-base-300 text-base font-bold">packages/hardhat/contracts</code>
           </p>
         </div>
