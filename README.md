@@ -6,7 +6,7 @@ Storage of SVG Strings on GNOSIS with the ability to render the base64 encoded i
  - Parameter 1 (string): Key Name 
  - Parameter 2 (string[]): SVG String Array
 
-**Example SVG String**
+**Example SVG String Array**
 ```
 ["<style type=\"text/css\">.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}</style>"
 ,"<circle class=\"st0\" cx=\"16\" cy=\"12\" r=\"9\"/>"
@@ -30,6 +30,6 @@ data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDIzIiBIZWlnaHQ9IjQyMyIgeG1sbnM9Imh0dH
  ![image](https://github.com/OwlWilderness/se-2/assets/98717833/277ea8c5-a445-4e1b-8971-22304bbc417a)
 
 ### Lock Key
-locks key so it can not be edited
+locks key so it can not be edited ever again (key does not have to have any svg strings)
 - Name: LockKey
 - Parameter 1 (string) : Key Name
