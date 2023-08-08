@@ -42,15 +42,15 @@ export const Header = () => {
       <li>
         <NavLink href="/debug">
           <BugAntIcon className="h-4 w-4" />
-          Debug Contracts
+          Gnostic SVG Contract
         </NavLink>
       </li>
-      <li>
+      {/*<li>
         <NavLink href="/example-ui">
           <SparklesIcon className="h-4 w-4" />
           Example UI
         </NavLink>
-      </li>
+      </li>*/}
       <li>
         <NavLink href="/blockexplorer">
           <MagnifyingGlassIcon className="h-4 w-4" />

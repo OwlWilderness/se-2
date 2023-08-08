@@ -2,12 +2,12 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 
 /**
- * Deploys a contract named "YourGnosticContract" using the deployer account and
+ * Deploys a contract named "GnosticSvg" using the deployer account and
  * constructor arguments set to the deployer address
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployYourGnosticContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployGnosticSvg: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -21,10 +21,9 @@ const deployYourGnosticContract: DeployFunction = async function (hre: HardhatRu
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("YourGnosticContract", {
+  await deploy("GnosticSvg", {
     from: deployer,
     // Contract constructor arguments
-    args: ["0x1a4c2b35c9b4cc9f9a833a43dbe3a78fdb80bb54"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
@@ -32,11 +31,11 @@ const deployYourGnosticContract: DeployFunction = async function (hre: HardhatRu
   });
 
   // Get the deployed contract
-  // const YourGnosticContract = await hre.ethers.getContract("YourGnosticContract", deployer);
+  // const GnosticSvg = await hre.ethers.getContract("GnosticSvg", deployer);
 };
 
-export default deployYourGnosticContract;
+export default deployGnosticSvg;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
-// e.g. yarn deploy --tags YourGnosticContract
-deployYourGnosticContract.tags = ["YourGnosticContract"];
+// e.g. yarn deploy --tags GnosticSvg
+deployGnosticSvg.tags = ["GnosticSvg"];

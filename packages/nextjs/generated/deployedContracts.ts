@@ -4,19 +4,33 @@ const contracts = {
       chainId: "100",
       name: "gnosis",
       contracts: {
-        YourGnosticContract: {
-          address: "0x69a1582EFf9507f7b4FE2796EfD98C4eB67aB2ac",
+        GnosticSvg: {
+          address: "0x2FAE0D57A1bf86aA3112d33e059ca203a15ECc51",
           abi: [
             {
+              anonymous: false,
               inputs: [
                 {
+                  indexed: true,
                   internalType: "address",
-                  name: "_owner",
+                  name: "_address",
                   type: "address",
                 },
+                {
+                  indexed: false,
+                  internalType: "string",
+                  name: "_key",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "_arraylen",
+                  type: "uint256",
+                },
               ],
-              stateMutability: "nonpayable",
-              type: "constructor",
+              name: "KeyCreated",
+              type: "event",
             },
             {
               anonymous: false,
@@ -24,125 +38,234 @@ const contracts = {
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "greetingSetter",
+                  name: "_address",
                   type: "address",
                 },
                 {
                   indexed: false,
                   internalType: "string",
-                  name: "newGreeting",
+                  name: "_key",
                   type: "string",
                 },
-                {
-                  indexed: false,
-                  internalType: "bool",
-                  name: "premium",
-                  type: "bool",
-                },
-                {
-                  indexed: false,
-                  internalType: "uint256",
-                  name: "value",
-                  type: "uint256",
-                },
               ],
-              name: "GreetingChange",
+              name: "KeyLocked",
               type: "event",
             },
             {
-              inputs: [],
-              name: "greeting",
-              outputs: [
+              anonymous: false,
+              inputs: [
                 {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "owner",
-              outputs: [
-                {
+                  indexed: true,
                   internalType: "address",
-                  name: "",
+                  name: "_address",
                   type: "address",
                 },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "premium",
-              outputs: [
                 {
-                  internalType: "bool",
-                  name: "",
-                  type: "bool",
+                  indexed: false,
+                  internalType: "string",
+                  name: "_key",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "_slot",
+                  type: "uint256",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
+              name: "KeySlotUpdated",
+              type: "event",
             },
             {
               inputs: [
                 {
                   internalType: "string",
-                  name: "_newGreeting",
+                  name: "Key",
                   type: "string",
                 },
-              ],
-              name: "setGreeting",
-              outputs: [],
-              stateMutability: "payable",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "totalCounter",
-              outputs: [
                 {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
+                  internalType: "string[]",
+                  name: "SvgStrngs",
+                  type: "string[]",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "",
-                  type: "address",
-                },
-              ],
-              name: "userGreetingCounter",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "withdraw",
+              name: "CreateKeyWithSVG",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
-              stateMutability: "payable",
-              type: "receive",
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "GetSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "Slot",
+                  type: "uint256",
+                },
+              ],
+              name: "GetSvgInKeySlot",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "LockKey",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "Name",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "Width",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "Height",
+                  type: "string",
+                },
+              ],
+              name: "RenderSizedSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "RenderSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "Slot",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "SvgStrng",
+                  type: "string",
+                },
+              ],
+              name: "SetSvgInKeySlot",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "Symbol",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
             },
           ],
         },
@@ -154,19 +277,33 @@ const contracts = {
       chainId: "31337",
       name: "localhost",
       contracts: {
-        YourGnosticContract: {
-          address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+        GnosticSvg: {
+          address: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
           abi: [
             {
+              anonymous: false,
               inputs: [
                 {
+                  indexed: true,
                   internalType: "address",
-                  name: "_owner",
+                  name: "_address",
                   type: "address",
                 },
+                {
+                  indexed: false,
+                  internalType: "string",
+                  name: "_key",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "_arraylen",
+                  type: "uint256",
+                },
               ],
-              stateMutability: "nonpayable",
-              type: "constructor",
+              name: "KeyCreated",
+              type: "event",
             },
             {
               anonymous: false,
@@ -174,125 +311,234 @@ const contracts = {
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "greetingSetter",
+                  name: "_address",
                   type: "address",
                 },
                 {
                   indexed: false,
                   internalType: "string",
-                  name: "newGreeting",
+                  name: "_key",
                   type: "string",
                 },
-                {
-                  indexed: false,
-                  internalType: "bool",
-                  name: "premium",
-                  type: "bool",
-                },
-                {
-                  indexed: false,
-                  internalType: "uint256",
-                  name: "value",
-                  type: "uint256",
-                },
               ],
-              name: "GreetingChange",
+              name: "KeyLocked",
               type: "event",
             },
             {
-              inputs: [],
-              name: "greeting",
-              outputs: [
+              anonymous: false,
+              inputs: [
                 {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "owner",
-              outputs: [
-                {
+                  indexed: true,
                   internalType: "address",
-                  name: "",
+                  name: "_address",
                   type: "address",
                 },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "premium",
-              outputs: [
                 {
-                  internalType: "bool",
-                  name: "",
-                  type: "bool",
+                  indexed: false,
+                  internalType: "string",
+                  name: "_key",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "_slot",
+                  type: "uint256",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
+              name: "KeySlotUpdated",
+              type: "event",
             },
             {
               inputs: [
                 {
                   internalType: "string",
-                  name: "_newGreeting",
+                  name: "Key",
                   type: "string",
                 },
-              ],
-              name: "setGreeting",
-              outputs: [],
-              stateMutability: "payable",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "totalCounter",
-              outputs: [
                 {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
+                  internalType: "string[]",
+                  name: "SvgStrngs",
+                  type: "string[]",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "",
-                  type: "address",
-                },
-              ],
-              name: "userGreetingCounter",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "withdraw",
+              name: "CreateKeyWithSVG",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
-              stateMutability: "payable",
-              type: "receive",
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "GetSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "Slot",
+                  type: "uint256",
+                },
+              ],
+              name: "GetSvgInKeySlot",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "LockKey",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "Name",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "Width",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "Height",
+                  type: "string",
+                },
+              ],
+              name: "RenderSizedSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "Address",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+              ],
+              name: "RenderSvgByAddrKey",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "Key",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "Slot",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "SvgStrng",
+                  type: "string",
+                },
+              ],
+              name: "SetSvgInKeySlot",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "Symbol",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
             },
           ],
         },

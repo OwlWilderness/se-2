@@ -21,17 +21,17 @@ export const ContractData = () => {
   const greetingRef = useRef<HTMLDivElement>(null);
 
   const { data: totalCounter } = useScaffoldContractRead({
-    contractName: "YourGnosticContract",
+    contractName: "GnosticSvg",
     functionName: "totalCounter",
   });
 
   const { data: currentGreeting, isLoading: isGreetingLoading } = useScaffoldContractRead({
-    contractName: "YourGnosticContract",
+    contractName: "GnosticSvg",
     functionName: "greeting",
   });
 
   useScaffoldEventSubscriber({
-    contractName: "YourGnosticContract",
+    contractName: "GnosticSvg",
     eventName: "GreetingChange",
     listener: logs => {
       logs.map(log => {
@@ -46,7 +46,7 @@ export const ContractData = () => {
     isLoading: isLoadingEvents,
     error: errorReadingEvents,
   } = useScaffoldEventHistory({
-    contractName: "YourGnosticContract",
+    contractName: "GnosticSvg",
     eventName: "GreetingChange",
     fromBlock: process.env.NEXT_PUBLIC_DEPLOY_BLOCK ? BigInt(process.env.NEXT_PUBLIC_DEPLOY_BLOCK) : 0n,
     filters: { greetingSetter: address },
@@ -55,8 +55,8 @@ export const ContractData = () => {
 
   console.log("Events:", isLoadingEvents, errorReadingEvents, myGreetingChangeEvents);
 
-  const { data: YourGnosticContract } = useScaffoldContract({ contractName: "YourGnosticContract" });
-  console.log("YourGnosticContract: ", YourGnosticContract);
+  const { data: GnosticSvg } = useScaffoldContract({ contractName: "GnosticSvg" });
+  console.log("GnosticSvg: ", GnosticSvg);
 
   const { showAnimation } = useAnimationConfig(totalCounter);
 
