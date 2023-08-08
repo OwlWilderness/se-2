@@ -1,6 +1,13 @@
 # Gnositc SVG
 Storage of SVG Strings on GNOSIS with the ability to render the base64 encoded image string.
 
+## Links
+### Verified Contract
+- https://gnosisscan.io/address/0x2FAE0D57A1bf86aA3112d33e059ca203a15ECc51#code
+### Demo Site
+- https://gnostic-svg-owlwilderness.vercel.app/debug
+
+## Some Methods
 ### Create Key With SVG
  - Name: CreateKeyWithSVG
  - Parameter 1 (string): Key Name 
