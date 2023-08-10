@@ -51,8 +51,8 @@ this section will contain ideas for content
 - SAN Origin Bind .4E (Completed)
 ## Assets
 - SAN Origin 3605 (SoulBound)
-- SAN Music Note #4 (Mecha Mint Pass)
-- SAN Sacrifice [2229, 3448, 572] (Metadata IP)
+- SAN Music Note #4 (Mecha Faction Mint Pass)
+- SAN Sacrifice [2229, 3448, 572] (Soulburned Metadata IP)
 - SAN Origin IEM Physical Claim (not shipped)
 - SAN Mecha Faction IEM Physical Claim (not shipped)
 
