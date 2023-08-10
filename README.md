@@ -37,14 +37,24 @@ this section will contain ideas for content
 ## 2023 Aug 03
 - cb transfer .3 eth for use to soulbind SAN token - https://etherscan.io/tx/0xe9bc9c53dbf1f86ca893ed01b74d06a6716185f7820f2438cc16a7c6a9765fe6
 - quantumtekh.eth soulbind SAN Origin 3605 to Gnosis Safe - https://etherscan.io/tx/0x242857ac776cabfd5c8d91b148ab2c0f3affa8476367906e4159bd21557d5f22
+
+## 2023 Aug 09
+- quantumtekh.eth transfer 2 SAN Origin Mecha [2229, 3448] - https://etherscan.io/tx/0x5b7330e9e606f80166a1cf81990270ca6fe2c4a2caf907b0a7fd1847917e0285
+- gametekh.cb.id transfer 1 SAN Origin Mecha [572] - https://etherscan.io/tx/0xead907ac8b55d615ba139a1e780c7e92c0552cc6a984f322e0547a1bedb05a6e
+- quantumtekh.eth execute approval for all SAN PASS - https://etherscan.io/tx/0xe855234bbb071a839b02238e989d38018f399c282d8420ba2c547b02dd643858
+- quantumtekh.eth execute burn and mint passes - https://etherscan.io/tx/0x1337b482c1da63952bb4b0d77427f2b0ba753d233c658cb4078355faf7bf798c
   
 # Acounting 
 ## Allocations
 - Buidl Guidl Integration .5E
 ## Completed
 - SAN Origin Bind .4E (Completed)
-
-
+## Assets
+- SAN Origin 3605 (SoulBound)
+- SAN Music Note #4 (Mecha Mint Pass)
+- SAN Sacrifice [2229, 3448, 572] (Metadata IP)
+- SAN Origin IEM Physical Claim (not shipped)
+- SAN Mecha Faction IEM Physical Claim (not shipped)
   
 # 🏗 Scaffold-ETH 2
 
