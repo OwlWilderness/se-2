@@ -55,6 +55,10 @@ this section will contain ideas for content
 - SAN Sacrifice [2229, 3448, 572] (Metadata IP)
 - SAN Origin IEM Physical Claim (not shipped)
 - SAN Mecha Faction IEM Physical Claim (not shipped)
+
+  ***
+  ___
+  ---
   
 # 🏗 Scaffold-ETH 2
 
