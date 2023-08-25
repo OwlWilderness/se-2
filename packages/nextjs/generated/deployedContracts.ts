@@ -1,80 +1,61 @@
 const contracts = {
-  100: [
+  31337: [
     {
-      chainId: "100",
-      name: "gnosis",
+      chainId: "31337",
+      name: "localhost",
       contracts: {
-        GnosticSvg: {
-          address: "0x2FAE0D57A1bf86aA3112d33e059ca203a15ECc51",
+        GnosticKey: {
+          address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
           abi: [
             {
-              anonymous: false,
               inputs: [
                 {
-                  indexed: true,
                   internalType: "address",
-                  name: "_address",
+                  name: "Address",
                   type: "address",
                 },
-                {
-                  indexed: false,
-                  internalType: "string",
-                  name: "_key",
-                  type: "string",
-                },
-                {
-                  indexed: false,
-                  internalType: "uint256",
-                  name: "_arraylen",
-                  type: "uint256",
-                },
               ],
-              name: "KeyCreated",
-              type: "event",
+              stateMutability: "nonpayable",
+              type: "constructor",
             },
             {
-              anonymous: false,
-              inputs: [
+              inputs: [],
+              name: "IgSVG",
+              outputs: [
                 {
-                  indexed: true,
-                  internalType: "address",
-                  name: "_address",
+                  internalType: "contract IGnosticSVG",
+                  name: "",
                   type: "address",
                 },
-                {
-                  indexed: false,
-                  internalType: "string",
-                  name: "_key",
-                  type: "string",
-                },
               ],
-              name: "KeyLocked",
-              type: "event",
+              stateMutability: "view",
+              type: "function",
             },
             {
-              anonymous: false,
-              inputs: [
+              inputs: [],
+              name: "Name",
+              outputs: [
                 {
-                  indexed: true,
-                  internalType: "address",
-                  name: "_address",
-                  type: "address",
-                },
-                {
-                  indexed: false,
                   internalType: "string",
-                  name: "_key",
+                  name: "",
                   type: "string",
                 },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "Symbol",
+              outputs: [
                 {
-                  indexed: false,
-                  internalType: "uint256",
-                  name: "_slot",
-                  type: "uint256",
+                  internalType: "string",
+                  name: "",
+                  type: "string",
                 },
               ],
-              name: "KeySlotUpdated",
-              type: "event",
+              stateMutability: "view",
+              type: "function",
             },
             {
               inputs: [
@@ -89,80 +70,14 @@ const contracts = {
                   type: "string[]",
                 },
               ],
-              name: "CreateKeyWithSVG",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "Address",
-                  type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-              ],
-              name: "GetSvgByAddrKey",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "Address",
-                  type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "Slot",
-                  type: "uint256",
-                },
-              ],
-              name: "GetSvgInKeySlot",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-              ],
-              name: "LockKey",
+              name: "xCreateKeyWithSVG",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [],
-              name: "Name",
+              name: "xName",
               outputs: [
                 {
                   internalType: "string",
@@ -196,7 +111,7 @@ const contracts = {
                   type: "string",
                 },
               ],
-              name: "RenderSizedSvgByAddrKey",
+              name: "xRenderSizedSvgByAddrKey",
               outputs: [
                 {
                   internalType: "string",
@@ -205,58 +120,11 @@ const contracts = {
                 },
               ],
               stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "Address",
-                  type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-              ],
-              name: "RenderSvgByAddrKey",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "Slot",
-                  type: "uint256",
-                },
-                {
-                  internalType: "string",
-                  name: "SvgStrng",
-                  type: "string",
-                },
-              ],
-              name: "SetSvgInKeySlot",
-              outputs: [],
-              stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [],
-              name: "Symbol",
+              name: "xSymbol",
               outputs: [
                 {
                   internalType: "string",
@@ -269,16 +137,8 @@ const contracts = {
             },
           ],
         },
-      },
-    },
-  ],
-  10200: [
-    {
-      chainId: "10200",
-      name: "chiado",
-      contracts: {
         GnosticSvg: {
-          address: "0x3DF124687fEae0d833249cF9A50aB9aE52055520",
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
             {
               anonymous: false,

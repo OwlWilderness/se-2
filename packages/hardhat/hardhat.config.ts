@@ -34,7 +34,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "chiado",
+  defaultNetwork: "localhost",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
