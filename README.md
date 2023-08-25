@@ -1,12 +1,14 @@
-0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac
+- GNOSIS: 0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac
+- CHIADO: 0x3DF124687fEae0d833249cF9A50aB9aE52055520
 
 # Your Gnostic Contract
 Scaffold Eth 2 YourContract deployed on Gnosis Chain using RPC of Home Gnosis Validator Node
 
 ## Verified Contract
-- [Verified Contract 0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac](https://gnosisscan.io/address/0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac#code)
+- [Gnosis Verified Contract 0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac](https://gnosisscan.io/address/0x69a1582eff9507f7b4fe2796efd98c4eb67ab2ac#code)
+- [Chiado Verified Contract 0x3DF124687fEae0d833249cF9A50aB9aE52055520](https://gnosis-chiado.blockscout.com/address/0x3DF124687fEae0d833249cF9A50aB9aE52055520#code)
 ## Demo Site
-- [Your Gnostic Contract Demo](https://your-gnostic-contract-owlwilderness.vercel.app/example-ui)
+- Gnosis [Your Gnostic Contract Demo](https://your-gnostic-contract-owlwilderness.vercel.app/example-ui)
 
 # Reference
 ## Gnosis Chain Documentation
