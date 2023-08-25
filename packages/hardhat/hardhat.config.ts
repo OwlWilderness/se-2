@@ -34,7 +34,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "gnosis",
+  defaultNetwork: "chiado",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -115,8 +115,8 @@ const config: HardhatUserConfig = {
         chainId: 10200,
         urls: {
           //Blockscout
-          apiURL: "https://blockscout.com/gnosis/chiado/api",
-          browserURL: "https://blockscout.com/gnosis/chiado",
+          apiURL: "https://gnosis-chiado.blockscout.com/api",
+          browserURL: "https://gnosis-chiado.blockscout.com/",
         },
       },
       {

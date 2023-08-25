@@ -272,13 +272,13 @@ const contracts = {
       },
     },
   ],
-  31337: [
+  10200: [
     {
-      chainId: "31337",
-      name: "localhost",
+      chainId: "10200",
+      name: "chiado",
       contracts: {
         GnosticSvg: {
-          address: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+          address: "0x3DF124687fEae0d833249cF9A50aB9aE52055520",
           abi: [
             {
               anonymous: false,
