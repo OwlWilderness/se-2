@@ -4,54 +4,366 @@ const contracts = {
       chainId: "31337",
       name: "localhost",
       contracts: {
-        GnosticKey: {
-          address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+        ConditionalTokens: {
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
             {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "Address",
-                  type: "address",
-                },
-              ],
+              inputs: [],
               stateMutability: "nonpayable",
               type: "constructor",
             },
             {
-              inputs: [],
-              name: "IgSVG",
-              outputs: [
+              anonymous: false,
+              inputs: [
                 {
-                  internalType: "contract IGnosticSVG",
-                  name: "",
+                  indexed: true,
+                  internalType: "address",
+                  name: "account",
                   type: "address",
                 },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "Name",
-              outputs: [
                 {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
+                  indexed: true,
+                  internalType: "address",
+                  name: "operator",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "bool",
+                  name: "approved",
+                  type: "bool",
                 },
               ],
-              stateMutability: "view",
-              type: "function",
+              name: "ApprovalForAll",
+              type: "event",
             },
             {
-              inputs: [],
-              name: "Symbol",
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "oracle",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "questionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "outcomeSlotCount",
+                  type: "uint256",
+                },
+              ],
+              name: "ConditionPreparation",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "oracle",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "questionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "outcomeSlotCount",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "payoutNumerators",
+                  type: "uint256[]",
+                },
+              ],
+              name: "ConditionResolution",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "redeemer",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "indexSets",
+                  type: "uint256[]",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "payout",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "newPositionId",
+                  type: "uint256",
+                },
+              ],
+              name: "PayoutRedemption",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "stakeholder",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "partition",
+                  type: "uint256[]",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "newPositionIds",
+                  type: "uint256[]",
+                },
+              ],
+              name: "PositionSplit",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "stakeholder",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: true,
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "partition",
+                  type: "uint256[]",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "newPositionId",
+                  type: "uint256",
+                },
+              ],
+              name: "PositionsMerge",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "operator",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "ids",
+                  type: "uint256[]",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256[]",
+                  name: "values",
+                  type: "uint256[]",
+                },
+              ],
+              name: "TransferBatch",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "operator",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
+                },
+              ],
+              name: "TransferSingle",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: false,
+                  internalType: "string",
+                  name: "value",
+                  type: "string",
+                },
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              name: "URI",
+              type: "event",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              name: "balanceOf",
               outputs: [
                 {
-                  internalType: "string",
+                  internalType: "uint256",
                   name: "",
-                  type: "string",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
@@ -60,29 +372,247 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
+                  internalType: "address[]",
+                  name: "accounts",
+                  type: "address[]",
                 },
                 {
-                  internalType: "string[]",
-                  name: "SvgStrngs",
-                  type: "string[]",
+                  internalType: "uint256[]",
+                  name: "ids",
+                  type: "uint256[]",
                 },
               ],
-              name: "xCreateKeyWithSVG",
+              name: "balanceOfBatch",
+              outputs: [
+                {
+                  internalType: "uint256[]",
+                  name: "",
+                  type: "uint256[]",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256",
+                  name: "indexSet",
+                  type: "uint256",
+                },
+              ],
+              name: "getCollectionId",
+              outputs: [
+                {
+                  internalType: "bytes32",
+                  name: "",
+                  type: "bytes32",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "oracle",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "questionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256",
+                  name: "outcomeSlotCount",
+                  type: "uint256",
+                },
+              ],
+              name: "getConditionId",
+              outputs: [
+                {
+                  internalType: "bytes32",
+                  name: "",
+                  type: "bytes32",
+                },
+              ],
+              stateMutability: "pure",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+              ],
+              name: "getOutcomeSlotCount",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "collectionId",
+                  type: "bytes32",
+                },
+              ],
+              name: "getPositionId",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "pure",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "collectionId",
+                  type: "bytes32",
+                },
+              ],
+              name: "getStringPositionId",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "pure",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "operator",
+                  type: "address",
+                },
+              ],
+              name: "isApprovedForAll",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "partition",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "mergePositions",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
-              inputs: [],
-              name: "xName",
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "",
+                  type: "bytes32",
+                },
+              ],
+              name: "payoutDenominator",
               outputs: [
                 {
-                  internalType: "string",
+                  internalType: "uint256",
                   name: "",
-                  type: "string",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "payoutNumerators",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
@@ -92,39 +622,216 @@ const contracts = {
               inputs: [
                 {
                   internalType: "address",
-                  name: "Address",
+                  name: "oracle",
                   type: "address",
                 },
                 {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
+                  internalType: "bytes32",
+                  name: "questionId",
+                  type: "bytes32",
                 },
                 {
-                  internalType: "string",
-                  name: "Width",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "Height",
-                  type: "string",
+                  internalType: "uint256",
+                  name: "outcomeSlotCount",
+                  type: "uint256",
                 },
               ],
-              name: "xRenderSizedSvgByAddrKey",
+              name: "prepareCondition",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "indexSets",
+                  type: "uint256[]",
+                },
+              ],
+              name: "redeemPositions",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes32",
+                  name: "questionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "payouts",
+                  type: "uint256[]",
+                },
+              ],
+              name: "reportPayouts",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "ids",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "amounts",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "bytes",
+                  name: "data",
+                  type: "bytes",
+                },
+              ],
+              name: "safeBatchTransferFrom",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bytes",
+                  name: "data",
+                  type: "bytes",
+                },
+              ],
+              name: "safeTransferFrom",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "operator",
+                  type: "address",
+                },
+                {
+                  internalType: "bool",
+                  name: "approved",
+                  type: "bool",
+                },
+              ],
+              name: "setApprovalForAll",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "contract IERC20",
+                  name: "collateralToken",
+                  type: "address",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "parentCollectionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "bytes32",
+                  name: "conditionId",
+                  type: "bytes32",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "partition",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "splitPosition",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "bytes4",
+                  name: "interfaceId",
+                  type: "bytes4",
+                },
+              ],
+              name: "supportsInterface",
               outputs: [
                 {
-                  internalType: "string",
+                  internalType: "bool",
                   name: "",
-                  type: "string",
+                  type: "bool",
                 },
               ],
               stateMutability: "view",
               type: "function",
             },
             {
-              inputs: [],
-              name: "xSymbol",
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "uri",
               outputs: [
                 {
                   internalType: "string",
@@ -137,32 +844,48 @@ const contracts = {
             },
           ],
         },
-        GnosticSvg: {
-          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        GnosticToken0: {
+          address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
           abi: [
             {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "symbol",
+                  type: "string",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "constructor",
+            },
+            {
               anonymous: false,
               inputs: [
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "_address",
+                  name: "owner",
                   type: "address",
                 },
                 {
-                  indexed: false,
-                  internalType: "string",
-                  name: "_key",
-                  type: "string",
+                  indexed: true,
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
                 },
                 {
                   indexed: false,
                   internalType: "uint256",
-                  name: "_arraylen",
+                  name: "value",
                   type: "uint256",
                 },
               ],
-              name: "KeyCreated",
+              name: "Approval",
               type: "event",
             },
             {
@@ -171,59 +894,70 @@ const contracts = {
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "_address",
+                  name: "from",
                   type: "address",
                 },
-                {
-                  indexed: false,
-                  internalType: "string",
-                  name: "_key",
-                  type: "string",
-                },
-              ],
-              name: "KeyLocked",
-              type: "event",
-            },
-            {
-              anonymous: false,
-              inputs: [
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "_address",
+                  name: "to",
                   type: "address",
-                },
-                {
-                  indexed: false,
-                  internalType: "string",
-                  name: "_key",
-                  type: "string",
                 },
                 {
                   indexed: false,
                   internalType: "uint256",
-                  name: "_slot",
+                  name: "value",
                   type: "uint256",
                 },
               ],
-              name: "KeySlotUpdated",
+              name: "Transfer",
               type: "event",
             },
             {
               inputs: [
                 {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
                 },
                 {
-                  internalType: "string[]",
-                  name: "SvgStrngs",
-                  type: "string[]",
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
                 },
               ],
-              name: "CreateKeyWithSVG",
-              outputs: [],
+              name: "allowance",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "approve",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
               stateMutability: "nonpayable",
               type: "function",
             },
@@ -231,21 +965,29 @@ const contracts = {
               inputs: [
                 {
                   internalType: "address",
-                  name: "Address",
+                  name: "account",
                   type: "address",
                 },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
               ],
-              name: "GetSvgByAddrKey",
+              name: "balanceOf",
               outputs: [
                 {
-                  internalType: "string",
+                  internalType: "uint256",
                   name: "",
-                  type: "string",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "decimals",
+              outputs: [
+                {
+                  internalType: "uint8",
+                  name: "",
+                  type: "uint8",
                 },
               ],
               stateMutability: "view",
@@ -255,52 +997,102 @@ const contracts = {
               inputs: [
                 {
                   internalType: "address",
-                  name: "Address",
+                  name: "spender",
                   type: "address",
                 },
                 {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
-                  name: "Slot",
+                  name: "subtractedValue",
                   type: "uint256",
                 },
               ],
-              name: "GetSvgInKeySlot",
+              name: "decreaseAllowance",
               outputs: [
                 {
-                  internalType: "string",
+                  internalType: "bool",
                   name: "",
-                  type: "string",
+                  type: "bool",
                 },
               ],
-              stateMutability: "view",
+              stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [
                 {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "addedValue",
+                  type: "uint256",
                 },
               ],
-              name: "LockKey",
+              name: "increaseAllowance",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "mint",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [],
-              name: "Name",
+              name: "name",
               outputs: [
                 {
                   internalType: "string",
                   name: "",
                   type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "symbol",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "totalSupply",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
                 },
               ],
               stateMutability: "view",
@@ -310,86 +1102,275 @@ const contracts = {
               inputs: [
                 {
                   internalType: "address",
-                  name: "Address",
+                  name: "to",
                   type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "Width",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "Height",
-                  type: "string",
-                },
-              ],
-              name: "RenderSizedSvgByAddrKey",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "Address",
-                  type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
-                },
-              ],
-              name: "RenderSvgByAddrKey",
-              outputs: [
-                {
-                  internalType: "string",
-                  name: "",
-                  type: "string",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "Key",
-                  type: "string",
                 },
                 {
                   internalType: "uint256",
-                  name: "Slot",
+                  name: "amount",
                   type: "uint256",
+                },
+              ],
+              name: "transfer",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "transferFrom",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+          ],
+        },
+        GnosticToken1: {
+          address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+          abi: [
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
                 },
                 {
                   internalType: "string",
-                  name: "SvgStrng",
+                  name: "symbol",
                   type: "string",
                 },
               ],
-              name: "SetSvgInKeySlot",
+              stateMutability: "nonpayable",
+              type: "constructor",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
+                },
+              ],
+              name: "Approval",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "value",
+                  type: "uint256",
+                },
+              ],
+              name: "Transfer",
+              type: "event",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+              ],
+              name: "allowance",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "approve",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+              ],
+              name: "balanceOf",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "decimals",
+              outputs: [
+                {
+                  internalType: "uint8",
+                  name: "",
+                  type: "uint8",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "subtractedValue",
+                  type: "uint256",
+                },
+              ],
+              name: "decreaseAllowance",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "spender",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "addedValue",
+                  type: "uint256",
+                },
+              ],
+              name: "increaseAllowance",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "mint",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
             {
               inputs: [],
-              name: "Symbol",
+              name: "name",
               outputs: [
                 {
                   internalType: "string",
@@ -398,6 +1379,85 @@ const contracts = {
                 },
               ],
               stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "symbol",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "totalSupply",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "transfer",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "transferFrom",
+              outputs: [
+                {
+                  internalType: "bool",
+                  name: "",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "nonpayable",
               type: "function",
             },
           ],

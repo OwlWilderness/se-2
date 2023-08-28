@@ -42,7 +42,7 @@ export const Header = () => {
       <li>
         <NavLink href="/debug">
           <BugAntIcon className="h-4 w-4" />
-          Gnostic SVG Contract
+          Debug Gnoistic Contracts
         </NavLink>
       </li>
       {/*<li>

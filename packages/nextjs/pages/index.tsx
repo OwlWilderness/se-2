@@ -15,19 +15,7 @@ const Home: NextPage = () => {
             <span className="block text-2xl mb-2">on Scaffold-ETH 2</span>
           </h1>
           <p className="text-center text-lg">
-            Store and Render SVG Strings on Gnosis
-          </p>
-          <p className="text-left text-lg">
-            Use Write: CreateKeyWithSVG(string key, string[] svgStrings) passing in any string value as a key an array of svg strings.
-          </p>
-          <p className="text-left text-lg">
-            Use Read: GetSvgByAddrKey(Address = quantumtekh.eth, Key = owl01) to see an example of SVG string array. 
-          </p>
-          <p className="text-left text-lg">
-            Use Read: RenderSvgByAddrKey(Address, Key) to get base64 encoded SVG image string. (paste result in browser uri field)
-          </p>
-          <p className="text-left text-lg">
-            Use Write: LockLey(string key) passing in any string value as the key to lock that key from every being updated again. 
+            Interact with Conditional Tokens
           </p>
         </div>
 
@@ -38,23 +26,11 @@ const Home: NextPage = () => {
               <p>
                 Create Gnostic SVGs using the{" "}
                 <Link href="/debug" passHref className="link">
-                  Gnostic SVG Contract
+                  Debug Gnostic Contracts
                 </Link>{" "}
                 tab.
               </p>
             </div>
-            {/*
-              <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-                <SparklesIcon className="h-8 w-8 fill-secondary" />
-                <p>
-                  Experiment with{" "}
-                  <Link href="/example-ui" passHref className="link">
-                    Example UI
-                  </Link>{" "}
-                  to build your own UI.
-                </p>
-              </div>
-            */}
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
               <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
               <p>
