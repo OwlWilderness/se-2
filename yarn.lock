@@ -36,6 +36,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@api3/airnode-abi@npm:^0.6.7":
+  version: 0.6.7
+  resolution: "@api3/airnode-abi@npm:0.6.7"
+  dependencies:
+    ethers: ^5.4.5
+    lodash: ^4.17.21
+  checksum: 79f0deba0694f8160b49b2328c674a4262c877684b61d8ac161672e40943e6890e3635890f0889bc354faaeef9d50088c51a6170b0e3c383c1f65562e85b2cf1
+  languageName: node
+  linkType: hard
+
+"@api3/airnode-admin@npm:^0.6.0":
+  version: 0.6.7
+  resolution: "@api3/airnode-admin@npm:0.6.7"
+  dependencies:
+    "@api3/airnode-abi": ^0.6.7
+    "@api3/airnode-protocol": ^0.6.7
+    "@api3/airnode-utilities": ^0.6.7
+    ethers: ^5.4.5
+    lodash: ^4.17.21
+    yargs: ^17.0.1
+  bin:
+    airnode-admin: dist/bin/admin.js
+  checksum: 400e331c9b5185dbfe6b535e1fb76763e16644d9d3ed61919848dc6aad8d40d8fada2df716926b8f155478e5120c8054c44a62fdcda2feb03002f4a93f61d339
+  languageName: node
+  linkType: hard
+
+"@api3/airnode-protocol@npm:^0.6.0, @api3/airnode-protocol@npm:^0.6.7":
+  version: 0.6.7
+  resolution: "@api3/airnode-protocol@npm:0.6.7"
+  dependencies:
+    "@openzeppelin/contracts": 4.4.2
+    ethers: ^5.4.5
+  checksum: 27e3a51e6dc8ace5cc4ec470e384a749029741af5caf3e7388c16688b204b74c20d1c5583569637a7561794460d47321e29e6739498489f803f5555da3628580
+  languageName: node
+  linkType: hard
+
+"@api3/airnode-utilities@npm:^0.6.7":
+  version: 0.6.7
+  resolution: "@api3/airnode-utilities@npm:0.6.7"
+  dependencies:
+    "@lifeomic/attempt": ^3.0.0
+    date-fns: ^2.16.1
+    ethers: ^5.4.5
+  checksum: ffa4c31cd233576402c86d3e320f2c0eb1200be2735d6859f2fb43ce6ca0c6413e9a214d2f31f8935a9354250bb8e4dd995019a4589745352cc0a46c27ad2845
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.16.7, @babel/code-frame@npm:^7.22.10, @babel/code-frame@npm:^7.22.5":
   version: 7.22.10
   resolution: "@babel/code-frame@npm:7.22.10"
@@ -1359,6 +1406,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.21.0":
+  version: 7.22.15
+  resolution: "@babel/runtime@npm:7.22.15"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 793296df1e41599a935a3d77ec01eb6088410d3fd4dbe4e92f06c6b7bb2f8355024e6d78621a3a35f44e0e23b0b59107f23d585384df4f3123256a1e1492040e
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/template@npm:7.22.5"
@@ -2645,6 +2701,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lifeomic/attempt@npm:^3.0.0":
+  version: 3.0.3
+  resolution: "@lifeomic/attempt@npm:3.0.3"
+  checksum: 837a6684432da2e45d436f70b0dc4cef3b4e8e5a62135f4593a17ee21141c7b9fa675437c918320624f5df09ca9466c0f4b38050d436282ba985f19d169dfc07
+  languageName: node
+  linkType: hard
+
 "@lit-labs/ssr-dom-shim@npm:^1.0.0, @lit-labs/ssr-dom-shim@npm:^1.1.0":
   version: 1.1.1
   resolution: "@lit-labs/ssr-dom-shim@npm:1.1.1"
@@ -3378,6 +3441,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@openzeppelin/contracts@npm:4.4.2":
+  version: 4.4.2
+  resolution: "@openzeppelin/contracts@npm:4.4.2"
+  checksum: 5c6be7bfe757c6a43eb5b24aa9c61a79deaed9de4bc5f59356b35f5519b0fb340f4da8b4df99588bded5e6b6a773fc54961917a1c657063247c1763f9752bd0e
+  languageName: node
+  linkType: hard
+
 "@openzeppelin/contracts@npm:^4.8.1":
   version: 4.9.3
   resolution: "@openzeppelin/contracts@npm:4.9.3"
@@ -3614,6 +3684,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@se-2/hardhat@workspace:packages/hardhat"
   dependencies:
+    "@api3/airnode-admin": ^0.6.0
+    "@api3/airnode-protocol": ^0.6.0
     "@ethersproject/abi": ^5.7.0
     "@ethersproject/providers": ^5.7.1
     "@matterlabs/hardhat-zksync-solc": ^0.3.17
@@ -7442,6 +7514,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cliui@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "cliui@npm:8.0.1"
+  dependencies:
+    string-width: ^4.2.0
+    strip-ansi: ^6.0.1
+    wrap-ansi: ^7.0.0
+  checksum: 79648b3b0045f2e285b76fb2e24e207c6db44323581e421c3acbd0e86454cba1b37aea976ab50195a49e7384b871e6dfb2247ad7dec53c02454ac6497394cb56
+  languageName: node
+  linkType: hard
+
 "clone-response@npm:^1.0.2":
   version: 1.0.3
   resolution: "clone-response@npm:1.0.3"
@@ -7894,6 +7977,15 @@ __metadata:
   version: 3.0.1
   resolution: "data-uri-to-buffer@npm:3.0.1"
   checksum: c59c3009686a78c071806b72f4810856ec28222f0f4e252aa495ec027ed9732298ceea99c50328cf59b151dd34cbc3ad6150bbb43e41fc56fa19f48c99e9fc30
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^2.16.1":
+  version: 2.30.0
+  resolution: "date-fns@npm:2.30.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+  checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
   languageName: node
   linkType: hard
 
@@ -9744,7 +9836,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^5.5.3, ethers@npm:^5.7.1":
+"ethers@npm:^5.4.5, ethers@npm:^5.5.3, ethers@npm:^5.7.1":
   version: 5.7.2
   resolution: "ethers@npm:5.7.2"
   dependencies:
@@ -19171,6 +19263,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yargs-parser@npm:^21.1.1":
+  version: 21.1.1
+  resolution: "yargs-parser@npm:21.1.1"
+  checksum: ed2d96a616a9e3e1cc7d204c62ecc61f7aaab633dcbfab2c6df50f7f87b393993fe6640d017759fe112d0cb1e0119f2b4150a87305cc873fd90831c6a58ccf1c
+  languageName: node
+  linkType: hard
+
 "yargs-unparser@npm:1.6.0":
   version: 1.6.0
   resolution: "yargs-unparser@npm:1.6.0"
@@ -19243,6 +19342,21 @@ __metadata:
     y18n: ^4.0.0
     yargs-parser: ^18.1.2
   checksum: 40b974f508d8aed28598087720e086ecd32a5fd3e945e95ea4457da04ee9bdb8bdd17fd91acff36dc5b7f0595a735929c514c40c402416bbb87c03f6fb782373
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^17.0.1":
+  version: 17.7.2
+  resolution: "yargs@npm:17.7.2"
+  dependencies:
+    cliui: ^8.0.1
+    escalade: ^3.1.1
+    get-caller-file: ^2.0.5
+    require-directory: ^2.1.1
+    string-width: ^4.2.3
+    y18n: ^5.0.5
+    yargs-parser: ^21.1.1
+  checksum: 73b572e863aa4a8cbef323dd911d79d193b772defd5a51aab0aca2d446655216f5002c42c5306033968193bdbf892a7a4c110b0d77954a7fdf563e653967b56a
   languageName: node
   linkType: hard
 

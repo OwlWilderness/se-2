@@ -1,3 +1,8 @@
+# Gnostic QRNG
+- https://docs.api3.org/explore/qrng/
+- https://docs.gnosischain.com/tools/oracles/api3
+
+
 # Gnositc Condition
 
 The intention of this project is to build a scaffold-eth project to illustrate the use of Conditional Tokens on Gnosis Chain.
