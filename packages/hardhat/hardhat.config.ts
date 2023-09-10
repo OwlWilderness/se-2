@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "localhost",
+  defaultNetwork: "mainnet",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -42,12 +42,12 @@ const config: HardhatUserConfig = {
     // If the network you are looking for is not here you can add new network settings
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
+        url: `https://nethermind-nethermind-public.${tekhApiKey}.dyndns.dappnode.io`,
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
     },
     mainnet: {
-      url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
+      url: `https://nethermind-nethermind-public.${tekhApiKey}.dyndns.dappnode.io`,
       accounts: [deployerPrivateKey],
     },
     sepolia: {
