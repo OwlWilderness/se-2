@@ -21,17 +21,17 @@ export const ContractData = () => {
   const greetingRef = useRef<HTMLDivElement>(null);
 
   const { data: totalCounter } = useScaffoldContractRead({
-    contractName: "YourContract",
+    contractName: "HelloUniverse",
     functionName: "totalCounter",
   });
 
   const { data: currentGreeting, isLoading: isGreetingLoading } = useScaffoldContractRead({
-    contractName: "YourContract",
+    contractName: "HelloUniverse",
     functionName: "greeting",
   });
 
   useScaffoldEventSubscriber({
-    contractName: "YourContract",
+    contractName: "HelloUniverse",
     eventName: "GreetingChange",
     listener: logs => {
       logs.map(log => {
@@ -46,7 +46,7 @@ export const ContractData = () => {
     isLoading: isLoadingEvents,
     error: errorReadingEvents,
   } = useScaffoldEventHistory({
-    contractName: "YourContract",
+    contractName: "HelloUniverse",
     eventName: "GreetingChange",
     fromBlock: process.env.NEXT_PUBLIC_DEPLOY_BLOCK ? BigInt(process.env.NEXT_PUBLIC_DEPLOY_BLOCK) : 0n,
     filters: { greetingSetter: address },
@@ -55,8 +55,8 @@ export const ContractData = () => {
 
   console.log("Events:", isLoadingEvents, errorReadingEvents, myGreetingChangeEvents);
 
-  const { data: yourContract } = useScaffoldContract({ contractName: "YourContract" });
-  console.log("yourContract: ", yourContract);
+  const { data: helloUniverse } = useScaffoldContract({ contractName: "HelloUniverse" });
+  console.log("helloUniverse: ", helloUniverse);
 
   const { showAnimation } = useAnimationConfig(totalCounter);
 

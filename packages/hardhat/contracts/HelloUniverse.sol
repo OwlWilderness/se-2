@@ -12,7 +12,7 @@ import "hardhat/console.sol";
  * It also allows the owner to withdraw the Ether in the contract
  * @author BuidlGuidl
  */
-contract YourContract {
+contract HelloUniverse {
 	// State Variables
 	address public immutable owner;
 	string public greeting = "Hello Universe!!!";

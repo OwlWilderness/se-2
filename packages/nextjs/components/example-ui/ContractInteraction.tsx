@@ -10,7 +10,7 @@ export const ContractInteraction = () => {
   const [newGreeting, setNewGreeting] = useState("");
 
   const { writeAsync, isLoading } = useScaffoldContractWrite({
-    contractName: "YourContract",
+    contractName: "HelloUniverse",
     functionName: "setGreeting",
     args: [newGreeting],
     value: "0.01",

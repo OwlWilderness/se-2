@@ -1,3 +1,9 @@
+# Hello Universe
+Scaffold-Eth 2 - Your Contract renamed to Hello Universe deployed on ethereum mainnet.
+
+- Verified Contract : https://etherscan.io/address/0xadcff772f8750abaee37e67263b163f6b2b9bb25#code
+- Demo : https://hello-universe.vercel.app/debug
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
@@ -61,7 +67,7 @@ Visit your app on: `http://localhost:3000`. You can interact with your smart con
 
 Run smart contract test with `yarn hardhat:test`
 
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
+- Edit your smart contract `HelloUniverse.sol` in `packages/hardhat/contracts`
 - Edit your frontend in `packages/nextjs/pages`
 - Edit your deployment scripts in `packages/hardhat/deploy`
 
