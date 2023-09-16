@@ -1,9 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-// Useful for debugging. Remove when deploying to a live network.
-import "hardhat/console.sol";
-
 // Use openzeppelin to inherit battle-tested implementations (ERC20, ERC721, etc)
 // import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -12,10 +9,10 @@ import "hardhat/console.sol";
  * It also allows the owner to withdraw the Ether in the contract
  * @author BuidlGuidl
  */
-contract YourContract {
+contract GnosticMercury {
 	// State Variables
 	address public immutable owner;
-	string public greeting = "Hello Universe!!!";
+	string public greeting = "Hello Gnostic Observers!";
 	bool public premium = false;
 	uint256 public totalCounter = 0;
 	mapping(address => uint) public userGreetingCounter;
@@ -25,6 +22,12 @@ contract YourContract {
 		address indexed greetingSetter,
 		string newGreeting,
 		bool premium,
+		uint256 value
+	);
+
+	event ManaSent(
+		address indexed manaSender,
+		address manaReceiver,
 		uint256 value
 	);
 
@@ -48,12 +51,6 @@ contract YourContract {
 	 * @param _newGreeting (string memory) - new greeting to save on the contract
 	 */
 	function setGreeting(string memory _newGreeting) public payable {
-		// Print data to the hardhat chain console. Remove when deploying to a live network.
-		console.log(
-			"Setting new greeting '%s' from %s",
-			_newGreeting,
-			msg.sender
-		);
 
 		// Change state variables
 		greeting = _newGreeting;
@@ -69,6 +66,15 @@ contract YourContract {
 
 		// emit: keyword used to trigger an event
 		emit GreetingChange(msg.sender, _newGreeting, msg.value > 0, 0);
+	}
+
+	function SendMana(address _address) public payable {
+		(bool success, ) = _address.call{ value: msg.value }("");
+
+		if(!success){
+			revert("Failed to send Ether");
+		}
+		emit ManaSent(msg.sender, _address, msg.value);
 	}
 
 	/**
