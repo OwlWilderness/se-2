@@ -15,6 +15,8 @@ const deployerPrivateKey =
 // If not set, it uses ours Etherscan default API key.
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 const gnosisscanApiKey = process.env.GNOSISSCAN_API_KEY;
+//tekhApiKey
+const tekhApiKey = process.env.TEKH_API_KEY;
 const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.17",
@@ -99,7 +101,8 @@ const config: HardhatUserConfig = {
       verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     },
     gnosis: {
-      url: "https://rpc.gnosischain.com",
+      //url: "https://rpc.gnosischain.com",
+      url: `https://nethermind-nethermind-xdai.${tekhApiKey}.dyndns.dappnode.io`,
       accounts: [deployerPrivateKey],
     },
     chiado: {
