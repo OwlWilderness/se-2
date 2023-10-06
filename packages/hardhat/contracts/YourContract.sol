@@ -19,6 +19,11 @@ import "hardhat/console.sol";
 	function SetSvgInKeySlot(string memory Key, uint Slot, string memory SvgStrng) external;
 
 	function LockKey(string memory Key) external;
+	
+	function GetSvgInKeySlot(address Address, string memory Key, uint Slot) external view returns (string memory);
+	
+	function GetSvgByAddrKey(address Address, string memory Key) external view returns (string memory);
+
  }
  
 /**
@@ -39,6 +44,9 @@ contract YourContract {
 	bool public premium = false;
 	uint256 public totalCounter = 0;
 	uint public manalock = .00236979 ether;
+
+	string public defaultWidth  = "400"; 
+	string public defaultHeight  = "400"; 
 
 	mapping(address => uint) public userGreetingCounter;
 	mapping(address => uint) public ActiveKeyIndex;
@@ -67,11 +75,13 @@ contract YourContract {
 	event KeyLocked(address sender, string lockedKey, string newCurrentKey);
 	event ManaLockUpdated(uint lastManaLock, uint newManalock);
 	event OwnerSet(address lastOwner, address newOwner);
+	event SizeSet(string lastHeight, string newHeight, string lastWidth, string newWidth);
 
 	// Constructor: Called once on contract deployment
 	// Check packages/hardhat/deploy/00_deploy_your_contract.ts
 	constructor(address _owner) {
 		owner = _owner;
+		initSVG();
 		emit OwnerSet(address(0), owner);
 	}
 
@@ -96,10 +106,37 @@ contract YourContract {
 		emit SetSvgContract(block.chainid, gSVG);
 	}
 
+
+	function GetSvgInSlot(address Address, uint Slot) external view returns (string memory){
+		return IgSVG.GetSvgInKeySlot(Address, GetCurrentKey(Address), Slot);
+	}
+	
+	function GetCurSvgByAddr(address Address) external view returns (string memory){
+		return IgSVG.GetSvgByAddrKey(Address, GetCurrentKey(Address));
+	}
+	
+	function GetSvgByAddrKey(address Address, string memory Key) external view returns (string memory){
+		return IgSVG.GetSvgByAddrKey(Address, Key);
+	}
+
+
+	function RenderSizedSvgByAddrKey(address Address, string memory Width, string memory Height) public view returns (string memory)	{
+		return IgSVG.RenderSizedSvgByAddrKey(Address, GetCurrentKey(Address), Width, Height);
+	}
+
+	function RenderDefaultSvgByAddrKey(address Address) public view returns (string memory)	{
+		return IgSVG.RenderSizedSvgByAddrKey(Address, GetCurrentKey(Address), defaultWidth, defaultHeight);
+	}
+
 	function GetCurrentKey(address _address) public view returns (string memory) {
 		uint idx = ActiveKeyIndex[_address];
-		bytes memory kek = abi.encodePacked(_address, idx);
-		return string(kek);
+		bytes32 kek = keccak256(abi.encodePacked(_address, idx));
+		return toString(kek);
+	}
+	
+	function GetKey(address _address, uint index) public pure returns (string memory) {
+		bytes32 kek = keccak256(abi.encodePacked(_address, index));
+		return toString(kek);
 	}
 
 	function SetSvgInKeySlot(uint Slot, string memory SvgStrng) public {
@@ -108,18 +145,21 @@ contract YourContract {
 		emit SetSvgInSlot(kek, Slot, SvgStrng);
 	}
 
-	function LockCurrentKey() public payable{
-		if(msg.value < manalock){
-			revert(MANALOCK_NOT_MET);	
-		}
+	function _lockKey() internal {
 		string memory kek = GetCurrentKey(msg.sender);
 		IgSVG.LockKey(kek);
-
 		ActiveKeyIndex[msg.sender] += 1;
-
 		string memory kek2 = GetCurrentKey(msg.sender);
 		emit KeyLocked(msg.sender, kek, kek2);
 	}
+
+	function LockCurrentKey() public payable {
+		if(msg.value < manalock){
+			revert(MANALOCK_NOT_MET);	
+		}
+		_lockKey();
+	}
+
 
 	function SendMana(address _address) public payable {
 		(bool success, ) = _address.call{ value: msg.value }("");
@@ -127,6 +167,11 @@ contract YourContract {
 		if(!success){
 			revert("Failed to send Ether");
 		}
+
+		SetSvgInKeySlot(0,toString(msg.value));
+		SetSvgInKeySlot(1,toString(_address));
+		_lockKey();
+
 		emit ManaSent(msg.sender, _address, msg.value);
 	}
 
@@ -134,6 +179,14 @@ contract YourContract {
 		uint last = manalock;
 		manalock = newManalock;
 		emit ManaLockUpdated(last, manalock);
+	}
+
+	function SetDefaultSize(string memory newHeight, string memory newWidth) public isOwner{
+    	string memory lastH = defaultHeight;
+		string memory lastW = defaultWidth;
+		defaultHeight = newHeight;
+		defaultWidth = newWidth;
+    	emit SizeSet(lastH, newHeight, lastW,newWidth);
 	}
 
 	function UpdateSVGContract(address NewContractAddr) public isOwner {
@@ -189,4 +242,29 @@ contract YourContract {
 	 * Function that allows the contract to receive ETH
 	 */
 	receive() external payable {}
+
+	function toString(address account) internal pure returns(string memory) {
+		return toString(abi.encodePacked(account));
+	}
+
+	function toString(uint256 value) internal pure returns(string memory) {
+		return toString(abi.encodePacked(value));
+	}
+
+	function toString(bytes32 value) internal pure returns(string memory) {
+		return toString(abi.encodePacked(value));
+	}
+
+	function toString(bytes memory data) internal pure returns(string memory) {
+		bytes memory alphabet = "0123456789abcdef";
+
+		bytes memory str = new bytes(2 + data.length * 2);
+		str[0] = "0";
+		str[1] = "x";
+		for (uint i = 0; i < data.length; i++) {
+			str[2+i*2] = alphabet[uint(uint8(data[i] >> 4))];
+			str[3+i*2] = alphabet[uint(uint8(data[i] & 0x0f))];
+		}
+    	return string(str);
+	}
 }
