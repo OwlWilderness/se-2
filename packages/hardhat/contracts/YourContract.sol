@@ -107,25 +107,36 @@ contract YourContract {
 	}
 
 
-	function GetSvgInSlot(address Address, uint Slot) external view returns (string memory){
+	function GetCurSvgInSlot(address Address, uint Slot) public view returns (string memory){
 		return IgSVG.GetSvgInKeySlot(Address, GetCurrentKey(Address), Slot);
 	}
 	
-	function GetCurSvgByAddr(address Address) external view returns (string memory){
+	function GetCurSvgByAddr(address Address) public view returns (string memory){
 		return IgSVG.GetSvgByAddrKey(Address, GetCurrentKey(Address));
 	}
 	
-	function GetSvgByAddrKey(address Address, string memory Key) external view returns (string memory){
+	function GetSvgByAddrKey(address Address, string memory Key) public view returns (string memory){
 		return IgSVG.GetSvgByAddrKey(Address, Key);
 	}
 
-
-	function RenderSizedSvgByAddrKey(address Address, string memory Width, string memory Height) public view returns (string memory)	{
-		return IgSVG.RenderSizedSvgByAddrKey(Address, GetCurrentKey(Address), Width, Height);
+	function GetSvgByKeySlot(address Address, string memory Key, uint Slot) public view returns (string memory){
+		return IgSVG.GetSvgInKeySlot(Address, Key, Slot);
 	}
 
-	function RenderDefaultSvgByAddrKey(address Address) public view returns (string memory)	{
-		return IgSVG.RenderSizedSvgByAddrKey(Address, GetCurrentKey(Address), defaultWidth, defaultHeight);
+	function RenderCurSizedSvgByAddr(address Address, string memory Width, string memory Height) public view returns (string memory)	{
+		return RenderSvg(Address, GetCurrentKey(Address), Width, Height);
+	}
+
+	function RenderCurDefaultSvgByAddr(address Address) public view returns (string memory)	{
+		return RenderSvg(Address, GetCurrentKey(Address), defaultWidth, defaultHeight);
+	}
+
+	function RenderSvg(address Address, string memory Key, string memory Width, string memory Height) public view returns (string memory) {
+		return IgSVG.RenderSizedSvgByAddrKey(Address, Key, Width, Height);
+	}
+
+	function RenderDefaultSvgByAddrKey(address Address, string memory Key) public view returns (string memory) {
+		return RenderSvg(Address, Key, defaultWidth, defaultHeight);
 	}
 
 	function GetCurrentKey(address _address) public view returns (string memory) {
@@ -168,8 +179,8 @@ contract YourContract {
 			revert("Failed to send Ether");
 		}
 
-		SetSvgInKeySlot(0,toString(msg.value));
-		SetSvgInKeySlot(1,toString(_address));
+		SetSvgInKeySlot(0,string(abi.encodePacked('<text x="20" y="20">',toString(msg.value),'</text>')));
+		SetSvgInKeySlot(1,string(abi.encodePacked('<text x="20" y="40">',toString(_address),'</text>')));
 		_lockKey();
 
 		emit ManaSent(msg.sender, _address, msg.value);
