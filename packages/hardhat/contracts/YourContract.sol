@@ -179,8 +179,7 @@ contract YourContract {
 			revert("Failed to send Ether");
 		}
 
-		SetSvgInKeySlot(0,string(abi.encodePacked('<text x="20" y="20">',toString(msg.value),'</text>')));
-		SetSvgInKeySlot(1,string(abi.encodePacked('<text x="20" y="40">',toString(_address),'</text>')));
+		SetSvgInKeySlot(1,string(abi.encodePacked('<text x="20" y="40">',toString(_address),'</text><text x="20" y="20">',toString(msg.value),'</text>')));
 		_lockKey();
 
 		emit ManaSent(msg.sender, _address, msg.value);
