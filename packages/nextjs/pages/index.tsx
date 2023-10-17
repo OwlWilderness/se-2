@@ -39,9 +39,15 @@ const Home: NextPage = () => {
     args: [msgSender, svgidx],
   });
 
-  const { data: svgstring } = useScaffoldContractRead({
+  const { data: svg64string } = useScaffoldContractRead({
     contractName: "YourContract",
     functionName: "RenderDefaultSvgByAddrKey",
+    args: [yourContract?.address, key],
+  });
+
+  const { data: svgstring } = useScaffoldContractRead({
+    contractName: "YourContract",
+    functionName: "GetSvgByAddrKey",
     args: [yourContract?.address, key],
   });
 
@@ -92,11 +98,13 @@ const Home: NextPage = () => {
           <InputBase value={svgidx} name="a" placeholder="0" onChange={v => setSvgIdx(v)}></InputBase>
           hash at index {svgidx.toString()}: {key}
         </div>
-
         <div>
-          <img src={svgstring} alt={svgstring} />
+          {" "}
+          Image:
+          <img src={svg64string} alt={svgstring} />
         </div>
-        <div> SVG String: {svgstring}</div>
+        <div> Base 64 Encoded: {svg64string}</div>
+        <div> SVG Content Text: {svgstring}</div>
       </div>
     </>
   );
