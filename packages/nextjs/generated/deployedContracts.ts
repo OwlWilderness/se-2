@@ -5,7 +5,7 @@ const contracts = {
       name: "chiado",
       contracts: {
         YourContract: {
-          address: "0x207015dFAdb96e440B4D2c06f76E4936A2B564c3",
+          address: "0xa3Cc628e53d58CAf8AeA23f798686e240A27EE7a",
           abi: [
             {
               inputs: [

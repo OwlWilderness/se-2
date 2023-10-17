@@ -1,70 +1,102 @@
-import Link from "next/link";
+import { useState } from "react";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { parseEther } from "viem";
+import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
+import { Address, AddressInput, Balance, EtherInput, InputBase } from "~~/components/scaffold-eth";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+
+//import Image from "next/image";
 
 const Home: NextPage = () => {
+  const [address, setAddress] = useState("");
+  const [ethAmount, setEthAmount] = useState("");
+  const [svgidx, setSvgIdx] = useState(BigInt(0));
+
+  const { address: msgSender } = useAccount();
+  const { data: yourContract } = useScaffoldContract({ contractName: "YourContract" });
+
+  const { writeAsync: sendMana, isLoading } = useScaffoldContractWrite({
+    contractName: "YourContract",
+    functionName: "SendMana",
+    args: [address],
+    value: parseEther(ethAmount),
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
+  const { data: activeKeyIndex } = useScaffoldContractRead({
+    contractName: "YourContract",
+    functionName: "ActiveKeyIndex",
+    args: [msgSender],
+  });
+
+  const { data: key } = useScaffoldContractRead({
+    contractName: "YourContract",
+    functionName: "GetKey",
+    args: [msgSender, svgidx],
+  });
+
+  const { data: svgstring } = useScaffoldContractRead({
+    contractName: "YourContract",
+    functionName: "RenderDefaultSvgByAddrKey",
+    args: [yourContract?.address, key],
+  });
+
   return (
     <>
       <MetaHeader />
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/pages/index.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
+
+      <div>SEND MANA: - payable call to send mana to an address and create a gnostic-svg entry</div>
+
+      <div>
+        <AddressInput onChange={setAddress} value={address} placeholder="Input your address" />
+        <Balance address={address} />
+        <EtherInput value={ethAmount} onChange={amount => setEthAmount(amount)} />
+        <button
+          className="btn btn-primary rounded-full capitalize font-normal font-white w-42 flex items-center gap-1 hover:gap-2 transition-all tracking-widest"
+          onClick={() => sendMana()}
+          disabled={isLoading}
+        >
+          full send
+        </button>{" "}
+      </div>
+
+      <div>
+        CONTRACT ADDRESS (YourContract): <Address address={yourContract?.address} format="long" />
+      </div>
+
+      <div>
+        <div>
+          MSG SENDER: <Address address={msgSender} format="long" />
+        </div>
+      </div>
+      <div>
+        <p></p>
+        NOTES:
+        <div>KEY = Hash(Msg.Sender + Index)</div>
+        <div>
+          Index is a sequencial number and incremented when a Key is Locked. Current Unlocked Index:{" "}
+          {activeKeyIndex?.toString() || "0"}
+        </div>
+        <div>Locked Keys cannot be edited</div>
+        <div>Keys have multiple slots that can contain a &apos;string&apos;</div>
+      </div>
+
+      <div>
+        <div>
+          <p></p>
+          SEARCH INDEX FOR MSG SENDER:
+          <InputBase value={svgidx} name="a" placeholder="0" onChange={v => setSvgIdx(v)}></InputBase>
+          hash at index {svgidx.toString()}: {key}
         </div>
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <SparklesIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Experiment with{" "}
-                <Link href="/example-ui" passHref className="link">
-                  Example UI
-                </Link>{" "}
-                to build your own UI.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-          </div>
+        <div>
+          <img src={svgstring} alt={svgstring} />
         </div>
+        <div> SVG String: {svgstring}</div>
       </div>
     </>
   );

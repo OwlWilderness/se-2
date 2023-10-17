@@ -108,6 +108,7 @@ const config: HardhatUserConfig = {
     chiado: {
       url: "https://rpc.chiadochain.net",
       accounts: [deployerPrivateKey],
+      gas: 40901888000,
     },
     base: {
       url: "https://mainnet.base.org",

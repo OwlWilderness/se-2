@@ -258,13 +258,14 @@ contract YourContract {
 	}
 
 	function toString(uint256 value) internal pure returns(string memory) {
-		return toString(abi.encodePacked(value));
+		return uint2str(value);
 	}
 
 	function toString(bytes32 value) internal pure returns(string memory) {
 		return toString(abi.encodePacked(value));
 	}
 
+	//this returns hex strings and should be renamed assuch
 	function toString(bytes memory data) internal pure returns(string memory) {
 		bytes memory alphabet = "0123456789abcdef";
 
@@ -277,4 +278,27 @@ contract YourContract {
 		}
     	return string(str);
 	}
+
+	    //convert integer to string
+    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint j = _i;
+        uint len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint k = len;
+        while (_i != 0) {
+            k = k-1;
+            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
+            bytes1 b1 = bytes1(temp);
+            bstr[k] = b1;
+            _i /= 10;
+        }
+        return string(bstr);
+    }
 }
