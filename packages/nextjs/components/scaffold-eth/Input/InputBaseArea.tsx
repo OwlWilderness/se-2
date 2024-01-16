@@ -7,7 +7,7 @@ type InputBaseProps<T> = CommonInputProps<T> & {
   suffix?: ReactNode;
 };
 
-export const InputBase = <T extends { toString: () => string } | undefined = string>({
+export const InputBaseArea = <T extends { toString: () => string } | undefined = string>({
   name,
   value,
   onChange,
@@ -25,7 +25,7 @@ export const InputBase = <T extends { toString: () => string } | undefined = str
   }
 
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLTextAreaElement>) => {
       onChange(e.target.value as unknown as T);
     },
     [onChange],
@@ -34,8 +34,8 @@ export const InputBase = <T extends { toString: () => string } | undefined = str
   return (
     <div className={`flex border-2 border-base-300 bg-base-200 text-accent ${modifier}`}>
       {prefix}
-      <input
-        className="input input-ghost focus-within:border-transparent focus:outline-none focus:bg-transparent focus:text-gray-400 h-[2.2rem] min-h-[2.2rem] px-4 border w-full font-medium placeholder:text-accent/50 text-gray-400"
+      <textarea
+        className="textarea textarea-ghost w-96 h-96"
         placeholder={placeholder}
         name={name}
         value={value?.toString()}
