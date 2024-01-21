@@ -3,14 +3,26 @@ import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { SpellTable } from "~~/components/SpellTable";
-import { Prepare } from "~~/components/bookshelf/Prepare";
+import { Prepare, Scribe } from "~~/components/bookshelf";
+import DataParent from "~~/components/bookshelf/DataParent";
 
 const Home: NextPage = () => {
   return (
     <>
       <div>
         <MetaHeader />
-        <Prepare />
+        <div className="grid grid-cols-3">
+          <div>
+            <Prepare />
+          </div>
+          <div>
+            <Scribe />
+          </div>
+          <div>
+            <DataParent />
+          </div>
+        </div>
+
         <SpellTable />
       </div>
       <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
