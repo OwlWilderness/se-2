@@ -1,11 +1,16 @@
 import { useState } from "react";
 import DataChild from "./DataChild";
 
+//reference: https://www.freecodecamp.org/news/pass-data-between-components-in-react/
 export default function DataParent() {
   const [data, setData] = useState("");
 
   const parentToChild = () => {
     setData("This is data from Parent Component to the Child Component.");
+  };
+
+  const childToParent = (childdata: any) => {
+    setData(childdata);
   };
 
   const clear = () => {
@@ -14,9 +19,8 @@ export default function DataParent() {
 
   return (
     <div data-theme="cyberpunk">
-      <div>
-        {" "}
-        <DataChild parentToChild={data} />
+      <div data-theme="retro">
+        <DataChild parentToChild={data} childToParent={childToParent} />
       </div>
 
       <div>
