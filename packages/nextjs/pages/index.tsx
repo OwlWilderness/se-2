@@ -1,22 +1,50 @@
+import { useState } from "react";
 import Link from "next/link";
 import type { NextPage } from "next";
+import { Address } from "viem";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { SpellTable } from "~~/components/SpellTable";
-import { Prepare, Scribe } from "~~/components/bookshelf";
+import { Cast, Prepare, Scribe, View } from "~~/components/bookshelf";
 import DataParent from "~~/components/bookshelf/DataParent";
 
 const Home: NextPage = () => {
+  const [wei, setWei] = useState("0");
+  const [script, setScript] = useState("");
+  const [to, setTo] = useState("");
+
+  const weiToParent = (childWei: string) => {
+    setWei(childWei);
+  };
+
+  const scriptToParent = (childScipt: any) => {
+    setScript(childScipt);
+  };
+
+  const toToParent = (childTo: Address) => {
+    setTo(childTo);
+  };
+
   return (
     <>
       <div>
         <MetaHeader />
         <div className="grid grid-cols-3">
           <div>
-            <Prepare />
+            <Prepare weiToParent={weiToParent} scriptToParent={scriptToParent} toToParent={toToParent} />
           </div>
           <div>
-            <Scribe />
+            <div>
+              <View parentToChild={script} />
+            </div>
+            <div className="grid grid-cols-2">
+              <div>
+                <Scribe script={script} to={to} />
+              </div>
+              <div>
+                <Cast wei={wei} script={script} to={to} />
+              </div>
+            </div>
           </div>
           <div>
             <DataParent />

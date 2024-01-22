@@ -1,12 +1,12 @@
-import { useScaffoldContractWrite } from "../../hooks/scaffold-eth/";
 import { Address, parseEther } from "viem";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
-export const Scribe = ({ to, script }: { to: Address; script: any }) => {
+export const Cast = ({ wei, to, script }: { wei: string; to: Address; script: any }) => {
   const { writeAsync } = useScaffoldContractWrite({
     contractName: "ScribeCast",
-    functionName: "scribe",
+    functionName: "cast",
     args: [to, script],
-    value: parseEther("0"),
+    value: parseEther(wei),
     blockConfirmations: 1,
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
@@ -18,11 +18,11 @@ export const Scribe = ({ to, script }: { to: Address; script: any }) => {
       <div>
         <div>
           <button className="btn btn-secondary btn-lg px-2 rounded-none" onClick={() => writeAsync()}>
-            scibeß
+            casT
           </button>
         </div>
       </div>
     </>
   );
 };
-export default Scribe;
+export default Cast;
