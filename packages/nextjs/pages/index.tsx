@@ -5,8 +5,7 @@ import { Address } from "viem";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { SpellTable } from "~~/components/SpellTable";
-import { Cast, Prepare, Scribe, View } from "~~/components/bookshelf";
-import DataParent from "~~/components/bookshelf/DataParent";
+import { Cast, Prepare, Scribe, Transform, View } from "~~/components/bookshelf";
 
 const Home: NextPage = () => {
   const [wei, setWei] = useState("0");
@@ -31,6 +30,9 @@ const Home: NextPage = () => {
         <MetaHeader />
         <div className="grid grid-cols-3">
           <div>
+            <Transform parentToChild={script} />
+          </div>
+          <div>
             <Prepare weiToParent={weiToParent} scriptToParent={scriptToParent} toToParent={toToParent} />
           </div>
           <div>
@@ -45,9 +47,6 @@ const Home: NextPage = () => {
                 <Cast wei={wei} script={script} to={to} />
               </div>
             </div>
-          </div>
-          <div>
-            <DataParent />
           </div>
         </div>
 
