@@ -4,13 +4,13 @@ import type { NextPage } from "next";
 import { Address } from "viem";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
-import { SpellTable } from "~~/components/SpellTable";
-import { Cast, Prepare, Scribe, Transform, View } from "~~/components/bookshelf";
+import { Cast, Prepare, Scribe, SpellTable, Transform, View } from "~~/components/bookshelf";
 
 const Home: NextPage = () => {
   const [wei, setWei] = useState("0");
   const [script, setScript] = useState("");
   const [to, setTo] = useState("");
+  const [base64, setBase64] = useState("");
 
   const weiToParent = (childWei: string) => {
     setWei(childWei);
@@ -24,16 +24,25 @@ const Home: NextPage = () => {
     setTo(childTo);
   };
 
+  const base64ToParent = (childbase64: any) => {
+    setBase64(childbase64);
+  };
+
   return (
     <>
       <div>
         <MetaHeader />
-        <div className="grid grid-cols-3">
+        <div data-theme="cyberpunk" className="grid grid-cols-3">
           <div>
-            <Transform parentToChild={script} />
+            <Transform parentToChild={base64} base64ToParent={base64ToParent} />
           </div>
           <div>
-            <Prepare weiToParent={weiToParent} scriptToParent={scriptToParent} toToParent={toToParent} />
+            <Prepare
+              scriptToChild={base64}
+              weiToParent={weiToParent}
+              scriptToParent={scriptToParent}
+              toToParent={toToParent}
+            />
           </div>
           <div>
             <div>

@@ -6,10 +6,12 @@ export const Prepare = ({
   weiToParent,
   scriptToParent,
   toToParent,
+  scriptToChild,
 }: {
   weiToParent: any;
   scriptToParent: any;
   toToParent: any;
+  scriptToChild: any;
 }) => {
   const [transferToAddress, setTransferToAddress] = useState("");
   const [script, setScript] = useState("");
@@ -38,13 +40,17 @@ export const Prepare = ({
 
   return (
     <>
-      <div data-theme="retro" className="flex items-center flex-col flex-grow pt-10">
+      <div className="flex items-center flex-col flex-grow pt-10">
         <div>
           <button className="btn btn-secondary" onClick={() => clear()}>
             Clear
           </button>
         </div>
-
+        <div>
+          <button className="btn btn-secondary" onClick={() => setScript(scriptToChild)}>
+            use
+          </button>
+        </div>
         <div className="flex flex-col w-96 my-2 space-y-1">
           <span className="text-lg font-semibold mb-1">transfer to: </span>
           <AddressInput
@@ -56,7 +62,11 @@ export const Prepare = ({
 
         <div className="flex flex-col w-96 h-96 my-2 space-y-1">
           <span className="text-lg font-semibold mb-1">spell: </span>
-          <BytesInputArea value={script} placeholder="script " onChange={newValue => setScriptToParent(newValue)} />
+          <BytesInputArea
+            value={script}
+            placeholder={scriptToChild}
+            onChange={newValue => setScriptToParent(newValue)}
+          />
         </div>
 
         <div className="flex flex-col w-96 my-10 space-y-1">

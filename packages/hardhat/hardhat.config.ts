@@ -41,14 +41,17 @@ const config: HardhatUserConfig = {
         url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
+      gas: 1000000000,
     },
     mainnet: {
       url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
+      gas: 1000000000,
     },
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
+      gas: 1000000000,
     },
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${providerApiKey}`,
@@ -65,6 +68,7 @@ const config: HardhatUserConfig = {
     optimism: {
       url: `https://opt-mainnet.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
+      gas: 1000000000,
     },
     optimismGoerli: {
       url: `https://opt-goerli.g.alchemy.com/v2/${providerApiKey}`,
@@ -101,10 +105,12 @@ const config: HardhatUserConfig = {
     gnosis: {
       url: "https://rpc.gnosischain.com",
       accounts: [deployerPrivateKey],
+      gas: 1000000000,
     },
     chiado: {
       url: "https://rpc.chiadochain.net",
       accounts: [deployerPrivateKey],
+      gas: 1000000000,
     },
     base: {
       url: "https://mainnet.base.org",
