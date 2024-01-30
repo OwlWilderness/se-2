@@ -1,3 +1,34 @@
+# gnostic eight ninty nine
+fractional ownership of the sansound ninty nine collective on gnosis with sustainable governance.  
+
+## details
+Purchase 2 SAN Sound 99 Collective A&R Governance tokens and 2 gnosis validator keys. The withdrawl address of the gnosis validators would be the multisig run by the token holders and validator earnings would be distributed to the holders to cover governance mana fees.
+
+- chain: gnosis
+- cost: 199 XDAI each (max 8)
+- access:
+  - 1 SANWEAR GT IEM UNIT*
+  - Fractional Ownership of up to two(2) 99 Collective governance tokens**
+  - Fractional Ownership of up to two(2) Gnosis Validators***
+  - gnosis multisig signer for governance
+
+* ** ***
+- 99 collective must sell out
+- 99 collective tokens are bought after the 3 mints
+- Gnosis Validator bought after the 4th mint
+- 2nd 99 collective token bought after 7 mints
+- 2nd Gnosis Validator bought after the 8th mint
+
+### gnosis validation
+gnosis validators require 1 gno and earn fees to participate in execution and consenses of the network
+
+validators would be run on an existing dappnode running gnosis validator keys but with a different withdrawl address that is controlled by the gnostic nine nine
+
+<img src="https://github.com/OwlWilderness/se-2/assets/98717833/143f6805-8f2e-40c0-a39c-f126fafd379e" alt="drawing" width="50%"/>
+
+
+
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
