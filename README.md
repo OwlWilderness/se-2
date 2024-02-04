@@ -1,3 +1,49 @@
+# Scribe Cast
+Emit an event and or create calldata with base64 data.
+
+Optionally upload an image or enter data and convert to bytes.
+
+## Deployment Information
+
+## Contract Information
+`
+ 	string public Name = "ScribeCast";
+	string public Symbol = "SCRAISBTE";
+`
+
+### Scribe
+`	
+	//scribe a spell:  into event data
+	function scribe(address _to, bytes memory _spell) public {
+		emit result(SCRIBE, _to, msg.sender, _spell, true);
+	}
+`
+### Cast
+`
+//cast a spell: project in call and event data
+	function cast(address payable _to, bytes memory _spell) public payable{
+		(bool success, ) = address(_to).call{ value: msg.value }(_spell);
+		if(success == false){
+			emit result(CAST, _to, msg.sender, _spell, false);
+			revert(COULD_NOT_CAST);
+		}
+		emit result(CAST, _to, msg.sender, _spell, true);
+	}
+`
+
+### Result Event
+`
+	//result of action (cast or scribe)
+	event result(
+		string action, 
+		address indexed to,
+		address indexed from,
+		bytes spell,
+		bool success
+	);
+`
+
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
