@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { bytesToString, toBytes } from "viem";
+import { BytesInputArea } from "../scaffold-eth";
 
 //reference
 //https://www.kindacode.com/article/react-show-image-preview-before-uploading/
 
-export const Transform = ({ parentToChild, base64ToParent }: { parentToChild: any; base64ToParent: any }) => {
+export const Transform = ({ scriptToParent }: { scriptToParent: any }) => {
   const [selectedImage, setSelectedImage] = useState();
+  const [script, setScript] = useState("");
 
   // This function will be triggered when the file field change
   const imageChange = async (e: any) => {
@@ -16,8 +17,12 @@ export const Transform = ({ parentToChild, base64ToParent }: { parentToChild: an
 
   //https://medium.com/nerd-for-tech/how-to-store-an-image-to-a-database-with-react-using-base-64-9d53147f6c4f
   const transformIt = async () => {
-    const b64: any = await convertToBase64(selectedImage);
-    base64ToParent(b64);
+    if (selectedImage) {
+      const b64: any = await convertToBase64(selectedImage);
+
+      //base64ToParent(b64);
+      setScript(b64);
+    }
   };
 
   const convertToBase64 = (file: any) => {
@@ -33,6 +38,11 @@ export const Transform = ({ parentToChild, base64ToParent }: { parentToChild: an
     });
   };
 
+  const setScriptToParent = (data: any) => {
+    setScript(data);
+    scriptToParent(data);
+  };
+
   return (
     <>
       <div>
@@ -46,15 +56,14 @@ export const Transform = ({ parentToChild, base64ToParent }: { parentToChild: an
           )}
         </div>
         <div>
-          <button className="btn" onClick={() => transformIt()}>
-            base 64
+          <button className="btn btn-primary" onClick={() => transformIt()}>
+            transform to base 64
           </button>
         </div>
       </div>
-      <div>
-        <figure>
-          <img src={bytesToString(toBytes(parentToChild!))} alt={bytesToString(toBytes(parentToChild!))} />
-        </figure>
+      <div className="flex flex-col w-96 h-96 my-2 space-y-1">
+        <span className="text-lg font-semibold mb-1">spell: </span>
+        <BytesInputArea value={script} placeholder={script} onChange={newValue => setScriptToParent(newValue)} />
       </div>
     </>
   );

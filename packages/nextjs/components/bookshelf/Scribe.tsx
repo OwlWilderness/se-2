@@ -17,7 +17,7 @@ export const Scribe = ({ to, script }: { to: Address; script: any }) => {
     <>
       <div>
         <div>
-          <button className="btn btn-secondary btn-lg px-2 rounded-none" onClick={() => writeAsync()}>
+          <button className="btn btn-primary " onClick={() => writeAsync()}>
             scibeß
           </button>
         </div>

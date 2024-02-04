@@ -1,26 +1,18 @@
 import { useState } from "react";
 import { Address } from "viem";
-import { AddressInput, BytesInputArea, EtherInput } from "~~/components/scaffold-eth";
+import { AddressInput, EtherInput } from "~~/components/scaffold-eth";
 
 export const Prepare = ({
   weiToParent,
-  scriptToParent,
   toToParent,
-  scriptToChild,
+  clearToParent,
 }: {
   weiToParent: any;
-  scriptToParent: any;
   toToParent: any;
-  scriptToChild: any;
+  clearToParent: any;
 }) => {
   const [transferToAddress, setTransferToAddress] = useState("");
-  const [script, setScript] = useState("");
   const [wei, setWei] = useState("0");
-
-  const setScriptToParent = (data: any) => {
-    setScript(data);
-    scriptToParent(data);
-  };
 
   const setWeiToParent = (wei: string) => {
     setWei(wei);
@@ -31,41 +23,24 @@ export const Prepare = ({
     setTransferToAddress(to);
     toToParent(to);
   };
-
   const clear = () => {
-    setScriptToParent("");
-    setWei("0");
-    setTransferToAddress("");
+    setToToParent("");
+    setWeiToParent("0");
+    clearToParent();
   };
-
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div>
-          <button className="btn btn-secondary" onClick={() => clear()}>
-            Clear
-          </button>
-        </div>
-        <div>
-          <button className="btn btn-secondary" onClick={() => setScript(scriptToChild)}>
-            use
-          </button>
-        </div>
-        <div className="flex flex-col w-96 my-2 space-y-1">
+      <div>
+        <button className="btn btn-secondary" onClick={() => clear()}>
+          {" "}
+          Clear{" "}
+        </button>
+        <div className="flex flex-col w-96 my-10 space-y-1">
           <span className="text-lg font-semibold mb-1">transfer to: </span>
           <AddressInput
             value={transferToAddress}
             placeholder="receiver address"
             onChange={newValue => setToToParent(newValue)}
-          />
-        </div>
-
-        <div className="flex flex-col w-96 h-96 my-2 space-y-1">
-          <span className="text-lg font-semibold mb-1">spell: </span>
-          <BytesInputArea
-            value={script}
-            placeholder={scriptToChild}
-            onChange={newValue => setScriptToParent(newValue)}
           />
         </div>
 

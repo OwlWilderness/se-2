@@ -17,7 +17,7 @@ export const Cast = ({ wei, to, script }: { wei: string; to: Address; script: an
     <>
       <div>
         <div>
-          <button className="btn btn-secondary btn-lg px-2 rounded-none" onClick={() => writeAsync()}>
+          <button className="btn btn-secondary" onClick={() => writeAsync()}>
             casT
           </button>
         </div>
