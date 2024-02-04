@@ -23,10 +23,8 @@ export const SpellTable = () => {
             <thead>
               <tr>
                 <th className="bg-primary">Action</th>
-                <th className="bg-primary">From</th>
-                <th className="bg-primary">To</th>
+                <th className="bg-primary">Address</th>
                 <th className="bg-primary">Spell</th>
-                <th className="bg-primary">Success</th>
               </tr>
             </thead>
             <tbody>
@@ -42,15 +40,14 @@ export const SpellTable = () => {
                     <tr key={index}>
                       <th className="text-center">{event.args.action}</th>
                       <td>
-                        <Address address={event.args.from} />
-                      </td>
-                      <td>
                         <Address address={event.args.to} />
                       </td>
                       <td>
-                        <img src={bytesToString(toBytes(event.args.spell!))} />
+                        <img
+                          src={bytesToString(toBytes(event.args.spell!))}
+                          alt={bytesToString(toBytes(event.args.spell!))}
+                        />
                       </td>
-                      <th className="text-center">{event.args.success?.toString()}</th>
                     </tr>
                   );
                 })
