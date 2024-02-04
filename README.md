@@ -6,10 +6,13 @@ Optionally upload an image or enter data and convert to bytes.
 ## Deployment Information
 uri: [spellbook-psi.vercel.app](https://spellbook-psi.vercel.app)
 
-### Test Net
-- Chiado
+### Chiado
 `deploying "ScribeCast" (tx: 0x6b178b01d867d181f44b538e74dc13c1f31d3ebdb6d512858ac88fe20d7d5efe)...: deployed at 0xD53e01c57d6E34e3a1C24f58B4CC307D1265f0E9 with 541164 gas`
 - [Chiado Verified Contract](https://gnosis-chiado.blockscout.com/address/0xD53e01c57d6E34e3a1C24f58B4CC307D1265f0E9#code)
+
+### gnosis
+`deploying "ScribeCast" (tx: 0x3b8e389844f5adff8e91fbf35df184e567a95c912e9286844366f37c823224d7)...: deployed at 0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E with 541176 gas`
+- [Gnosis Verified Contract](https://gnosisscan.io/address/0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E#code)
 
 ## Contract Information
 `

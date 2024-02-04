@@ -1,0 +1,189 @@
+{
+  "address": "0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "action",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "spell",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "name": "result",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "Name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "Symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_spell",
+          "type": "bytes"
+        }
+      ],
+      "name": "cast",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_spell",
+          "type": "bytes"
+        }
+      ],
+      "name": "scribe",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x3b8e389844f5adff8e91fbf35df184e567a95c912e9286844366f37c823224d7",
+  "receipt": {
+    "to": null,
+    "from": "0xCECb2e2a27f8755c67C804C5f676c5f3Ca34e5b6",
+    "contractAddress": "0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E",
+    "transactionIndex": 0,
+    "gasUsed": "541176",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xaecd80fcb29c716b8a00a87ebe12d602de9c267259dfde5a513b9cd63c7960dc",
+    "transactionHash": "0x3b8e389844f5adff8e91fbf35df184e567a95c912e9286844366f37c823224d7",
+    "logs": [],
+    "blockNumber": 32291692,
+    "cumulativeGasUsed": "541176",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "b02797f3e33204fe233d7e56533d7443",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"spell\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"name\":\"result\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"Name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_spell\",\"type\":\"bytes\"}],\"name\":\"cast\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_spell\",\"type\":\"bytes\"}],\"name\":\"scribe\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"quantumtekh.eth source: https://github.com/OwlWilderness/se-2/tree/spellbook forked from: scaffold https://github.com/OwlWilderness/se-2 uri: https://spellbook-psi.vercel.app \",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"Cast into call and event data or Scribe into event data.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/ScribeCast.sol\":\"ScribeCast\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/ScribeCast.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n/**\\n * Cast into call and event data or Scribe into event data.\\n * @author quantumtekh.eth\\n * source: https://github.com/OwlWilderness/se-2/tree/spellbook\\n * forked from: scaffold https://github.com/OwlWilderness/se-2\\n * uri: https://spellbook-psi.vercel.app \\n */\\n\\ncontract ScribeCast {\\n \\tstring public Name = \\\"ScribeCast\\\";\\n\\tstring public Symbol = \\\"SCRAISBTE\\\";\\n\\tstring private COULD_NOT_CAST = \\\"failed to cast. verify payable _to.\\\";\\n\\tstring private CAST = \\\"cast\\\";\\n\\tstring private SCRIBE = \\\"scribe\\\";\\n\\n\\t//result of action (cast or scribe)\\n\\tevent result(\\n\\t\\tstring action, \\n\\t\\taddress indexed to,\\n\\t\\taddress indexed from,\\n\\t\\tbytes spell,\\n\\t\\tbool success\\n\\t);\\n\\t\\n\\t//cast a spell: project in call and event data\\n\\tfunction cast(address payable _to, bytes memory _spell) public payable{\\n\\t\\t(bool success, ) = address(_to).call{ value: msg.value }(_spell);\\n\\t\\tif(success == false){\\n\\t\\t\\temit result(CAST, _to, msg.sender, _spell, false);\\n\\t\\t\\trevert(COULD_NOT_CAST);\\n\\t\\t}\\n\\t\\temit result(CAST, _to, msg.sender, _spell, true);\\n\\t}\\n\\t\\n\\t//scribe a spell:  into event data\\n\\tfunction scribe(address _to, bytes memory _spell) public {\\n\\t\\temit result(SCRIBE, _to, msg.sender, _spell, true);\\n\\t}\\n}\\n\",\"keccak256\":\"0xb863b8c97585ad6848965587521ddc54b030bb922d8372d89823c07e60906baf\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60c0604052600a60809081526914d8dc9a589950d85cdd60b21b60a0526000906100299082610184565b5060408051808201909152600981526853435241495342544560b81b60208201526001906100579082610184565b506040518060600160405280602381526020016108226023913960029061007e9082610184565b5060408051808201909152600481526318d85cdd60e21b60208201526003906100a79082610184565b5060408051808201909152600681526573637269626560d01b60208201526004906100d29082610184565b503480156100df57600080fd5b50610243565b634e487b7160e01b600052604160045260246000fd5b600181811c9082168061010f57607f821691505b60208210810361012f57634e487b7160e01b600052602260045260246000fd5b50919050565b601f82111561017f57600081815260208120601f850160051c8101602086101561015c5750805b601f850160051c820191505b8181101561017b57828155600101610168565b5050505b505050565b81516001600160401b0381111561019d5761019d6100e5565b6101b1816101ab84546100fb565b84610135565b602080601f8311600181146101e657600084156101ce5750858301515b600019600386901b1c1916600185901b17855561017b565b600085815260208120601f198616915b82811015610215578886015182559484019460019091019084016101f6565b50858210156102335787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b6105d0806102526000396000f3fe60806040526004361061003f5760003560e01c806302b0e45e146100445780633045aaf3146100665780638052474d14610091578063be2a1f79146100a6575b600080fd5b34801561005057600080fd5b5061006461005f36600461039b565b6100b9565b005b34801561007257600080fd5b5061007b61010e565b604051610088919061043b565b60405180910390f35b34801561009d57600080fd5b5061007b61019c565b6100646100b436600461039b565b6101a9565b336001600160a01b0316826001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be600484600160405161010293929190610533565b60405180910390a35050565b6001805461011b90610455565b80601f016020809104026020016040519081016040528092919081815260200182805461014790610455565b80156101945780601f1061016957610100808354040283529160200191610194565b820191906000526020600020905b81548152906001019060200180831161017757829003601f168201915b505050505081565b6000805461011b90610455565b6000826001600160a01b031634836040516101c4919061056b565b60006040518083038185875af1925050503d8060008114610201576040519150601f19603f3d011682016040523d82523d6000602084013e610206565b606091505b509091505080151560000361028a57336001600160a01b0316836001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be600385600060405161025e93929190610533565b60405180910390a3600260405162461bcd60e51b81526004016102819190610587565b60405180910390fd5b336001600160a01b0316836001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be60038560016040516102d393929190610533565b60405180910390a3505050565b6001600160a01b03811681146102f557600080fd5b50565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261031f57600080fd5b813567ffffffffffffffff8082111561033a5761033a6102f8565b604051601f8301601f19908116603f01168101908282118183101715610362576103626102f8565b8160405283815286602085880101111561037b57600080fd5b836020870160208301376000602085830101528094505050505092915050565b600080604083850312156103ae57600080fd5b82356103b9816102e0565b9150602083013567ffffffffffffffff8111156103d557600080fd5b6103e18582860161030e565b9150509250929050565b60005b838110156104065781810151838201526020016103ee565b50506000910152565b600081518084526104278160208601602086016103eb565b601f01601f19169290920160200192915050565b60208152600061044e602083018461040f565b9392505050565b600181811c9082168061046957607f821691505b60208210810361048957634e487b7160e01b600052602260045260246000fd5b50919050565b8054600090600181811c90808316806104a957607f831692505b602080841082036104ca57634e487b7160e01b600052602260045260246000fd5b838852602088018280156104e557600181146104fb57610526565b60ff198716825285151560051b82019750610526565b60008981526020902060005b8781101561052057815484820152908601908401610507565b83019850505b5050505050505092915050565b606081526000610546606083018661048f565b8281036020840152610558818661040f565b9150508215156040830152949350505050565b6000825161057d8184602087016103eb565b9190910192915050565b60208152600061044e602083018461048f56fea264697066735822122086b665c9cd43db92e986b6a1a60cfc86a16d595dd4e5c4bae15718fdb910e97564736f6c634300081100336661696c656420746f20636173742e207665726966792070617961626c65205f746f2e",
+  "deployedBytecode": "0x60806040526004361061003f5760003560e01c806302b0e45e146100445780633045aaf3146100665780638052474d14610091578063be2a1f79146100a6575b600080fd5b34801561005057600080fd5b5061006461005f36600461039b565b6100b9565b005b34801561007257600080fd5b5061007b61010e565b604051610088919061043b565b60405180910390f35b34801561009d57600080fd5b5061007b61019c565b6100646100b436600461039b565b6101a9565b336001600160a01b0316826001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be600484600160405161010293929190610533565b60405180910390a35050565b6001805461011b90610455565b80601f016020809104026020016040519081016040528092919081815260200182805461014790610455565b80156101945780601f1061016957610100808354040283529160200191610194565b820191906000526020600020905b81548152906001019060200180831161017757829003601f168201915b505050505081565b6000805461011b90610455565b6000826001600160a01b031634836040516101c4919061056b565b60006040518083038185875af1925050503d8060008114610201576040519150601f19603f3d011682016040523d82523d6000602084013e610206565b606091505b509091505080151560000361028a57336001600160a01b0316836001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be600385600060405161025e93929190610533565b60405180910390a3600260405162461bcd60e51b81526004016102819190610587565b60405180910390fd5b336001600160a01b0316836001600160a01b03167fbf538e30bcd875f68ab5784c91c3b2543ffbda4b63cb883afaba4793c97114be60038560016040516102d393929190610533565b60405180910390a3505050565b6001600160a01b03811681146102f557600080fd5b50565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261031f57600080fd5b813567ffffffffffffffff8082111561033a5761033a6102f8565b604051601f8301601f19908116603f01168101908282118183101715610362576103626102f8565b8160405283815286602085880101111561037b57600080fd5b836020870160208301376000602085830101528094505050505092915050565b600080604083850312156103ae57600080fd5b82356103b9816102e0565b9150602083013567ffffffffffffffff8111156103d557600080fd5b6103e18582860161030e565b9150509250929050565b60005b838110156104065781810151838201526020016103ee565b50506000910152565b600081518084526104278160208601602086016103eb565b601f01601f19169290920160200192915050565b60208152600061044e602083018461040f565b9392505050565b600181811c9082168061046957607f821691505b60208210810361048957634e487b7160e01b600052602260045260246000fd5b50919050565b8054600090600181811c90808316806104a957607f831692505b602080841082036104ca57634e487b7160e01b600052602260045260246000fd5b838852602088018280156104e557600181146104fb57610526565b60ff198716825285151560051b82019750610526565b60008981526020902060005b8781101561052057815484820152908601908401610507565b83019850505b5050505050505092915050565b606081526000610546606083018661048f565b8281036020840152610558818661040f565b9150508215156040830152949350505050565b6000825161057d8184602087016103eb565b9190910192915050565b60208152600061044e602083018461048f56fea264697066735822122086b665c9cd43db92e986b6a1a60cfc86a16d595dd4e5c4bae15718fdb910e97564736f6c63430008110033",
+  "devdoc": {
+    "author": "quantumtekh.eth source: https://github.com/OwlWilderness/se-2/tree/spellbook forked from: scaffold https://github.com/OwlWilderness/se-2 uri: https://spellbook-psi.vercel.app ",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "Cast into call and event data or Scribe into event data.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 5,
+        "contract": "contracts/ScribeCast.sol:ScribeCast",
+        "label": "Name",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 8,
+        "contract": "contracts/ScribeCast.sol:ScribeCast",
+        "label": "Symbol",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 11,
+        "contract": "contracts/ScribeCast.sol:ScribeCast",
+        "label": "COULD_NOT_CAST",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 14,
+        "contract": "contracts/ScribeCast.sol:ScribeCast",
+        "label": "CAST",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 17,
+        "contract": "contracts/ScribeCast.sol:ScribeCast",
+        "label": "SCRIBE",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_string_storage"
+      }
+    ],
+    "types": {
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

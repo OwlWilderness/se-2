@@ -15,6 +15,7 @@ const deployerPrivateKey =
 // If not set, it uses ours Etherscan default API key.
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 const gnosisscanApiKey = process.env.GNOSISSCAN_API_KEY;
+const tekhApiKey = process.env.TEKH_API_KEY;
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -27,7 +28,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "chiado",
+  defaultNetwork: "gnosis",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -104,9 +105,11 @@ const config: HardhatUserConfig = {
       verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     },
     gnosis: {
-      url: `https://lb.drpc.org/ogrpc?network=gnosis&dkey=${providerApiKey}`,
+      url: `https://nethermind-nethermind-xdai.${tekhApiKey}.dyndns.dappnode.io`,
+      //url: `https://lb.drpc.org/ogrpc?network=gnosis&dkey=${providerApiKey}`,
       accounts: [deployerPrivateKey],
-      gas: 10000000000,
+      chainId: 100,
+      gas: 10000000000000,
     },
     chiado: {
       url: "https://rpc.chiadochain.net",
@@ -141,7 +144,7 @@ const config: HardhatUserConfig = {
   etherscan: {
     customChains: [
       {
-        network: "gnosis",
+        network: "chiado",
         chainId: 10200,
         urls: {
           //Blockscout
