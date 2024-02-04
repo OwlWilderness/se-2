@@ -4,8 +4,9 @@ pragma solidity >=0.8.0 <0.9.0;
 /**
  * Cast into call and event data or Scribe into event data.
  * @author quantumtekh.eth
- * source: https://github.com/OwlWilderness/se-2/tree/gnostic-scribe
+ * source: https://github.com/OwlWilderness/se-2/tree/spellbook
  * forked from: scaffold https://github.com/OwlWilderness/se-2
+ * uri: https://spellbook-psi.vercel.app 
  */
 
 contract ScribeCast {

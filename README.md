@@ -4,6 +4,12 @@ Emit an event and or create calldata with base64 data.
 Optionally upload an image or enter data and convert to bytes.
 
 ## Deployment Information
+uri: [spellbook-psi.vercel.app](https://spellbook-psi.vercel.app)
+
+### Test Net
+- Chiado
+`deploying "ScribeCast" (tx: 0x6b178b01d867d181f44b538e74dc13c1f31d3ebdb6d512858ac88fe20d7d5efe)...: deployed at 0xD53e01c57d6E34e3a1C24f58B4CC307D1265f0E9 with 541164 gas`
+- [Chiado Verified Contract](https://gnosis-chiado.blockscout.com/address/0xD53e01c57d6E34e3a1C24f58B4CC307D1265f0E9#code)
 
 ## Contract Information
 `

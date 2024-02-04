@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/ScribeCast.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\n/**\n * Cast into call and event data or Scribe into event data.\n * @author quantumtekh.eth\n * source: https://github.com/OwlWilderness/se-2/tree/gnostic-scribe\n * forked from: scaffold https://github.com/OwlWilderness/se-2\n */\n\ncontract ScribeCast {\n \tstring public Name = \"ScribeCast\";\n\tstring public Symbol = \"SCRAISBTE\";\n\tstring private COULD_NOT_CAST = \"failed to cast. verify payable _to.\";\n\tstring private CAST = \"cast\";\n\tstring private SCRIBE = \"scribe\";\n\n\t//result of action (cast or scribe)\n\tevent result(\n\t\tstring action, \n\t\taddress indexed to,\n\t\taddress indexed from,\n\t\tbytes spell,\n\t\tbool success\n\t);\n\t\n\t//cast a spell: project in call and event data\n\tfunction cast(address payable _to, bytes memory _spell) public payable{\n\t\t(bool success, ) = address(_to).call{ value: msg.value }(_spell);\n\t\tif(success == false){\n\t\t\temit result(CAST, _to, msg.sender, _spell, false);\n\t\t\trevert(COULD_NOT_CAST);\n\t\t}\n\t\temit result(CAST, _to, msg.sender, _spell, true);\n\t}\n\t\n\t//scribe a spell:  into event data\n\tfunction scribe(address _to, bytes memory _spell) public {\n\t\temit result(SCRIBE, _to, msg.sender, _spell, true);\n\t}\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
