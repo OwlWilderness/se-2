@@ -6,4 +6,4 @@ export * from "./View";
 export * from "./Cast";
 export * from "./Transform";
 export * from "./SpellTable";
-export * from "./Welcome";
+export * from "./What";

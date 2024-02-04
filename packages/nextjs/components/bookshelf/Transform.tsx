@@ -43,6 +43,10 @@ export const Transform = ({ scriptToParent }: { scriptToParent: any }) => {
     scriptToParent(data);
   };
 
+  const clear = async () => {
+    setScriptToParent("");
+  };
+
   return (
     <>
       <div>
@@ -51,13 +55,16 @@ export const Transform = ({ scriptToParent }: { scriptToParent: any }) => {
 
           {selectedImage && (
             <div>
-              <img src={URL.createObjectURL(selectedImage)} alt="Thumb" />
+              <img src={URL.createObjectURL(selectedImage)} alt="" />
             </div>
           )}
         </div>
         <div>
           <button className="btn btn-primary" onClick={() => transformIt()}>
             transform to base 64
+          </button>
+          <button className="btn btn-sm btn-outline" onClick={() => clear()}>
+            clear spell
           </button>
         </div>
       </div>
@@ -68,4 +75,5 @@ export const Transform = ({ scriptToParent }: { scriptToParent: any }) => {
     </>
   );
 };
+
 export default Transform;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Cast, Prepare, Scribe, SpellTable, Transform, View, Welcome } from ".";
+import { Cast, Prepare, Scribe, SpellTable, Transform, View, What } from ".";
 import Howl from "./Howl";
 import { Address } from "viem";
 
@@ -46,15 +46,18 @@ export const Nook = () => {
     setWei("");
   };
 
+  const [seed, setSeed] = useState(1);
+  const refresh = () => {
+    setSeed(Math.random());
+  };
+  //https://stackoverflow.com/questions/56649094/how-to-reload-a-component-part-of-page-in-reactjs
+
   return (
     <>
       <div data-theme="cyberpunk" className="grid grid-rows-1">
-        <div>
-          <Welcome />
-        </div>
-
         <div className="grid items-center grid-cols-3">
           <div>
+            <What />
             <Howl />
           </div>
           <div>
@@ -63,12 +66,12 @@ export const Nook = () => {
           <div>
             <View parentToChild={script} />
             <Prepare weiToParent={weiToParent} toToParent={toToParent} clearToParent={clearToParent} />
-            <Scribe script={script} to={to} />
-            <Cast wei={wei} script={script} to={to} />
+            <Scribe script={script} to={to} refresh={refresh} />
+            <Cast wei={wei} script={script} to={to} refresh={refresh} />
           </div>
         </div>
         <div>
-          <SpellTable />
+          <SpellTable key={seed} />
         </div>
       </div>
     </>
