@@ -4,6 +4,7 @@ Emit an event and or create calldata with base64 data.
 Optionally upload an image or enter data and convert to bytes.
 
 ## Deployment Information
+Demo (not mobile friendly)
 uri: [spellbook-psi.vercel.app](https://spellbook-psi.vercel.app)
 
 ### Chiado
