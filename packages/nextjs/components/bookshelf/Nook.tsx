@@ -4,7 +4,7 @@ import Howl from "./Howl";
 import { Address } from "viem";
 
 //nook inspired by zo3
-export const Nook = () => {
+export const Nook = ({ clsname }: { clsname: any }) => {
   const [wei, setWei] = useState("0");
   const [script, setScript] = useState("");
   const [to, setTo] = useState("");
@@ -55,7 +55,7 @@ export const Nook = () => {
   return (
     <>
       <div data-theme="cyberpunk" items-center className="grid grid-rows-1">
-        <div className="grid items-left grid-cols-3">
+        <div className={clsname}>
           <div>
             <What />
             <Howl />

@@ -9,7 +9,7 @@ const Home: NextPage = () => {
     <>
       <div>
         <MetaHeader />
-        <Nook />
+        <Nook clsname={"grid items-left grid-cols-3"} />
       </div>
       <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
         <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
