@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "mainnet",
+  defaultNetwork: "gnosis",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer

@@ -55,7 +55,7 @@ export const Nook = () => {
   return (
     <>
       <div data-theme="cyberpunk" items-center className="grid grid-rows-1">
-        <div className="grid items-left grid-cols-1">
+        <div className="grid items-left grid-cols-3">
           <div>
             <What />
             <Howl />
