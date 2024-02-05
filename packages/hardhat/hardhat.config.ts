@@ -8,7 +8,7 @@ import "@matterlabs/hardhat-zksync-verify";
 
 // If not set, it uses ours Alchemy's default API key.
 // You can get your own at https://dashboard.alchemyapi.io
-const providerApiKey = process.env.DRPC_API_KEY; //?? (process.env.ALCHEMY_API_KEY || "oKxs-03sij-U_N0iOlrSsZFr29-IqbuF");
+const providerApiKey = process.env.ALCHEMY_API_KEY || "oKxs-03sij-U_N0iOlrSsZFr29-IqbuF";
 // If not set, it uses the hardhat account 0 private key.
 const deployerPrivateKey =
   process.env.DEPLOYER_PRIVATE_KEY ?? "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "gnosis",
+  defaultNetwork: "mainnet",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -40,15 +40,15 @@ const config: HardhatUserConfig = {
     // If the network you are looking for is not here you can add new network settings
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
+        url: `https://eth-mainnet.g.alchemy.com/v2/${providerApiKey}`,
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
       gas: 1000000000,
     },
     mainnet: {
-      url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
+      url: `https://eth-mainnet.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
-      gas: 1000000000,
+      gas: 100000000000000,
     },
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
