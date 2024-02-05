@@ -31,11 +31,11 @@ export const Prepare = ({
   return (
     <>
       <div>
-        <button className="btn btn-sm btn-outline" onClick={() => clear()}>
+        <button className="btn btn-sm btn-outline my-10" onClick={() => clear()}>
           {" "}
-          clear this side{" "}
+          clear image above and data below{" "}
         </button>
-        <div className="flex flex-col w-96 my-10 space-y-1">
+        <div className="flex flex-col w-96 my-1 space-y-1">
           <span className="text-lg font-semibold mb-1">receiver wallet address: </span>
           <AddressInput
             value={transferToAddress}
@@ -44,7 +44,7 @@ export const Prepare = ({
           />
         </div>
 
-        <div className="flex flex-col w-96 my-10 space-y-1">
+        <div className="flex flex-col w-96 my-5 space-y-1">
           <span className="text-lg font-semibold mb-1">mana [optional]: </span>
           <EtherInput value={wei} placeholder="mana" onChange={newValue => setWeiToParent(newValue)} />
         </div>

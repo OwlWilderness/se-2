@@ -2,7 +2,7 @@ export const Howl = () => {
   return (
     <>
       <div className="px-5">
-        <h1 className="text-center mb-8">
+        <h1 className="mb-8">
           <span className="block text-2xl mb-2">how to</span>
           <span className="block text-4xl font-bold">*****</span>
         </h1>

@@ -48,6 +48,7 @@ const config: HardhatUserConfig = {
     mainnet: {
       url: `https://eth-mainnet.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
+      chainId: 1,
       gas: 100000000000000,
     },
     sepolia: {
