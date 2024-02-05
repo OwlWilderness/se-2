@@ -15,6 +15,10 @@ uri: [spellbook-psi.vercel.app](https://spellbook-psi.vercel.app)
 `deploying "ScribeCast" (tx: 0x3b8e389844f5adff8e91fbf35df184e567a95c912e9286844366f37c823224d7)...: deployed at 0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E with 541176 gas`
 - [Gnosis Verified Contract](https://gnosisscan.io/address/0x23Ad6acb5ceFdf05DA4240843943C5b359F2AB0E#code)
 
+### mainnet
+`deploying "ScribeCast" (tx: 0x5d06262e75c313123c11f094d92df4eab44442e22abf303f36555cda3427ead4)...: deployed at 0x0B4cbCfDb14D4D162fb34850E65413E9C5fB530F with 541176 gas`
+- [Mainnet Verified Contract](https://etherscan.io/address/0x0B4cbCfDb14D4D162fb34850E65413E9C5fB530F#code)
+
 ## Contract Information
 `
  	string public Name = "ScribeCast";
