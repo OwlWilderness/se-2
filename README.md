@@ -1,13 +1,23 @@
-# Buidl Guidl Infinity Key Puzzle Integration
+# Overview
+This repo started with the intention to integrate buidl guild and infinity keys.  That has since changed as the ik timeline has changed.  This repo now will be used to continue the SAN adventure it started - See Assets below. These assets are held in the safe multisig defined below
+
+## Goals - SAN
+- Create nouns.build DAO to aquire SAN Assets and maintain a create a governance around external tekh/dev
+- create fun san dapps
+
+
+  
+### Buidl Guidl Infinity Key Puzzle Integration (secondary)
 
 - The intention of this repo is to contain information and ideas related to the integration of a Buidl Guidl puzzleline into Infinity Keys.
 - The Buidl Guidl stream for quantumtekh.eth will be directed towards the IK team
 - This repo will be updated as the project progresss 
 
-## Summary
+## Links
 - [Buidl Guidl](https://buidlguidl.com/) - A curated group of Ethereum builders creating products, prototypes, and tutorials to enrich the web3 ecosystem.
 - [Infinity Keys](https://www.infinitykeys.io/) - Infinity Keys is gaming infrastructure for user-created missions that link to analog or digital experiences.
-
+- [SAN Sound](https://www.sansound.io/) - SAN Sound is a IEM Hardware company with token outreach.
+  
 ## Integration
 this section will contain ideas for content
 
@@ -43,18 +53,25 @@ this section will contain ideas for content
 - gametekh.cb.id transfer 1 SAN Origin Mecha [572] - https://etherscan.io/tx/0xead907ac8b55d615ba139a1e780c7e92c0552cc6a984f322e0547a1bedb05a6e
 - quantumtekh.eth execute approval for all SAN PASS - https://etherscan.io/tx/0xe855234bbb071a839b02238e989d38018f399c282d8420ba2c547b02dd643858
 - quantumtekh.eth execute burn and mint passes - https://etherscan.io/tx/0x1337b482c1da63952bb4b0d77427f2b0ba753d233c658cb4078355faf7bf798c
+
+## 2024 Feb 15
+- quantumtekh.eth transfer .5 eth back to buidl guild 0x97843608a00e2bbc75ab0C1911387E002565DEDE - https://etherscan.io/tx/0xe5704f28d9dc5c104090d87194e2027e25175eb21719bead54912284f393e66a
+- quantumtekh.eth remove existing safe owners
+  - https://etherscan.io/tx/0xeaae381eabab8171541a659e4c3c2a0e797a4afc0d908056cc28af84976a6aa0
+  - https://etherscan.io/tx/0xe02231e833c2282fd68f6c6afcf769c2cd7f23d04faea26ffbfee70539be804a
   
 # Acounting 
 ## Allocations
-- Buidl Guidl Integration .5E
+- Buidl Guidl Integration .5E (sent back to buidl guidl 2/15/2024)
 ## Completed
 - SAN Origin Bind .4E (Completed)
 ## Assets
 - SAN Origin 3605 (SoulBound)
-- SAN Music Note #4 (Mecha Faction Mint Pass)
 - SAN Sacrifice [2229, 3448, 572] (Soulburned Metadata IP)
 - SAN Origin IEM Physical Claim (not shipped)
-- SAN Mecha Faction IEM Physical Claim (not shipped)
+- SAN Music Note #4 (Mecha Faction Mint Pass)
+  - SAN Mecha Faction IEM Physical Claim (not shipped)
+  - SAN Mecha Faction Avatar (not claimed)
 
   ***
   ___
