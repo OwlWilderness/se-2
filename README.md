@@ -1,3 +1,41 @@
+SANWeI DAiO
+
+**mission**: 
+- Participate in [SANSound.io](https://sansound.io/about/getting-started) governance thru collection asset and governance tokens
+- Provide on chain proposal system to record and vote on governance decisions
+
+**goals**:
+- Purchase 5 (five) SAN 99 Collective (99C) tokens [555.55 USDC each].
+- Manage and build Repository of SAN related tools and templates.
+- Implement cross chain governance utilizing Gnosis Guild Zodiac DAO Tooling
+
+**mechanics**:
+- DAO deployed on Base chain to reduce governance transaction fees
+- [nouns.build](https://nouns.build) DAO protocol  (1% contribution - ends 2026.02.28 ~19 tokens max)
+- tokens auctioned every 9hours and 9minutes and 33 seconds with a reserve price of 0.0099 ETH
+-0.3% ownership required to agenerate a proposal. 13% quorum required to pass.
+- koa.eth has veto power
+- 1% tokens to tekh.eth as founder (ends 2026.02.26 ~19 tokens max)
+- 9% tokens to Gnosis Multisig Safe on Base chain controlled by SaNWeI holders (ends 2028.02.29 ~345 tokens max)
+
+**general**:
+- DAO members will receive all tekh.eth admin traits
+- DAO will swap Base ETH for USDC and purchase 99 collective tokens as able.
+
+**initial assets**:
+- ETH Gnosis Safe
+    - soulbound light cro with private keys
+    - mecha music note 
+    - lunar chrome iem
+- Base Gnosis Safe (empty)
+
+**goal incentive** 
+- IF 99 collective sells out the DAO will receive +1 GT Unit for each 99C token held [max 5 matching GT Units]
+
+**dao proposal options**:
+- provide holders assets based on criteria 
+- sell or use assets for san wei related purposes 
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
