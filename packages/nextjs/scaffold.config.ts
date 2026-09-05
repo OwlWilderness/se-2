@@ -1,4 +1,31 @@
+import { defineChain } from "viem";
 import * as chains from "viem/chains";
+
+export const cotiMainnet = defineChain({
+  id: 2_632_500,
+  name: "COTI",
+  nativeCurrency: { name: "COTI", symbol: "COTI", decimals: 18 },
+  rpcUrls: {
+    default: { http: ["https://mainnet.coti.io/rpc"], webSocket: ["wss://mainnet.coti.io/ws"] },
+  },
+  blockExplorers: {
+    default: { name: "COTIScan", url: "https://mainnet.cotiscan.io" },
+  },
+  testnet: false,
+});
+
+export const cotiTestnet = defineChain({
+  id: 7_082_400,
+  name: "COTI Testnet",
+  nativeCurrency: { name: "COTI", symbol: "COTI", decimals: 18 },
+  rpcUrls: {
+    default: { http: ["https://testnet.coti.io/rpc"], webSocket: ["wss://testnet.coti.io/ws"] },
+  },
+  blockExplorers: {
+    default: { name: "COTIScan Testnet", url: "https://testnet.cotiscan.io" },
+  },
+  testnet: true,
+});
 
 export type ScaffoldConfig = {
   targetNetworks: readonly chains.Chain[];

@@ -10,6 +10,7 @@ import { spawn } from "child_process";
 async function main() {
   const networkIndex = process.argv.indexOf("--network");
   const networkName = networkIndex !== -1 ? process.argv[networkIndex + 1] : "default";
+  const buildProfile = networkName === "coti" || networkName === "cotiTestnet" ? "coti" : "default";
 
   const isLocalNetwork = networkName === "default" || networkName === "hardhat";
 
@@ -33,7 +34,23 @@ async function main() {
     }
   }
 
-  // Run hardhat deploy (compilation already handled by the npm script)
+  const compile = spawn("hardhat", ["compile", "--build-profile", buildProfile], {
+    stdio: "inherit",
+    env: process.env,
+    shell: process.platform === "win32",
+  });
+
+  await new Promise<void>((resolve, reject) => {
+    compile.on("exit", code => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Hardhat compilation failed with exit code ${code ?? "unknown"}`));
+      }
+    });
+    compile.on("error", reject);
+  });
+
   const deployArgs = ["deploy", "--no-compile", "--skip-prompts", ...process.argv.slice(2)];
 
   const hardhat = spawn("hardhat", deployArgs, {

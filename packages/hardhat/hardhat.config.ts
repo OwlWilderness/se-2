@@ -18,8 +18,8 @@ export const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4U
 export default defineConfig({
   plugins: [hardhatToolbox, HardhatDeploy],
   solidity: {
-    compilers: [
-      {
+    profiles: {
+      default: {
         version: "0.8.30",
         settings: {
           optimizer: {
@@ -29,7 +29,17 @@ export default defineConfig({
           },
         },
       },
-    ],
+      coti: {
+        version: "0.8.30",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+          evmVersion: "paris",
+        },
+      },
+    },
   },
   generateTypedArtifacts: {
     destinations: [
@@ -116,6 +126,16 @@ export default defineConfig({
     celoSepolia: {
       type: "http",
       url: "https://forno.celo-sepolia.celo-testnet.org/",
+      accounts: [deployerPrivateKey],
+    },
+    coti: {
+      type: "http",
+      url: "https://mainnet.coti.io/rpc",
+      accounts: [deployerPrivateKey],
+    },
+    cotiTestnet: {
+      type: "http",
+      url: "https://testnet.coti.io/rpc",
       accounts: [deployerPrivateKey],
     },
     polygon: {
